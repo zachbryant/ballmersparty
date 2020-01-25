@@ -1,0 +1,22 @@
+// https://coolors.co/3a1c71-f25f5c-ffaf7b-7cea9c-55d6be
+$theme-colors: (
+  'primary': #3a1c71,
+  'danger': #f25f5c,
+  'secondary': #ffaf7b,
+  'success': #7cea9c,
+  'info': #55d6be
+);
+
+$navbar-padding-y: 0.25rem;
+
+// @import 'https://fonts.googleapis.com/css?family=Open+Sans|Ubuntu&display=swap';
+
+$font-family-sans-serif: 'Open Sans', -apple-system, BlinkMacSystemFont,
+  'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+  'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+// $navbar-light-color: #1b0d34;
+
+@import '~bootstrap/scss/_functions.scss';
+@import '~bootstrap/scss/_variables.scss';
+@import '~bootstrap/scss/_mixins.scss';

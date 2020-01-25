@@ -12,7 +12,12 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        href:
+          'https://fonts.googleapis.com/css?family=Open+Sans|Ubuntu&display=swap',
+        rel: 'stylesheet'
+      }
     ]
   },
   /*
@@ -23,12 +28,18 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/scss/main.scss'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
   ],
+
+  proxy: {
+    // Simple proxy
+    '/api/': 'http://localhost:8080'
+  },
   /*
   ** Nuxt.js dev-modules
   */
@@ -39,7 +50,8 @@ export default {
   */
   modules: [
     // Doc: https://bootstrap-vue.js.org
-    'bootstrap-vue/nuxt',
+    // 'bootstrap-vue/nuxt',
+    ['bootstrap-vue/nuxt', { css: false }],
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
