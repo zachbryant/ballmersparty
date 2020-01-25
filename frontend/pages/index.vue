@@ -1,10 +1,10 @@
 <template lang="pug">
-  b-container(fluid class="container")
+  div
     b-row
       b-col(cols="9")
         IntroChart
       b-col(cols="3")
-        //StartBox
+        StartBox
 </template>
 
 <script scoped>
