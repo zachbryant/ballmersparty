@@ -37,7 +37,7 @@
 
 			b-modal#termsModal(size="xl" title="Terms and Conditions")
 				Terms
-			b-modal#privacyModal(size="xl" title="Privacy Policy") Placeholder: You have no right to privacy on any data we collect.
+			b-modal#privacyModal(size="xl" title="Privacy Policy") Placeholder: You have no right to privacy on any data we collect while you visit this website.
 </template>
 
 <script>
@@ -47,13 +47,10 @@ export default {
 	name: 'StartBox',
 	data() {
 		return {
-			showUPass: false,
-			showPPass: false,
-			showPrivacyDialog: false,
-			showTermsDialog: false,
 			valid: false,
 			agree: false,
 			user_id: '',
+			party_id: '',
 			nameRules: [
 				v => !!v || 'This field is required',
 				v => v.length >= 3 || 'Must be at least be at least 3 characters.',
@@ -64,9 +61,6 @@ export default {
 				v => v.length >= 6 || 'Must be at least be at least 6 characters.',
 				v => v.length <= 32 || 'Must be less than 32 characters.'
 			],
-			user_pass: '',
-			party_id: '',
-			party_pass: '',
 			tooltip: 'New accounts and parties are created on the fly.'
 		}
 	},
@@ -86,11 +80,3 @@ export default {
 </script>
 
 <style lang="less" src="../assets/less/global.less")</style>
-
-<style lang="less" scoped>
-@primary: rgba(239, 83, 80, 1);
-
-#activator {
-	color: @primary !important;
-}
-</style>

@@ -68,12 +68,13 @@
       <ul>
         <li>
           By accessing the website at
-          <a class="underline" href="http://BP.io">http://BP.io</a>, You are
-          bound by these Terms, all applicable laws and regulations, and are
-          responsible for compliance with any applicable local laws. If You do
-          not agree with any of these Terms, You are prohibited from using or
-          accessing this site. The materials contained in this website are
-          protected by applicable copyright and trademark law.
+          <a class="underline" href="http://ballmers.party"
+            >http://ballmers.party</a
+          >, You are bound by these Terms, all applicable laws and regulations,
+          and are responsible for compliance with any applicable local laws. If
+          You do not agree with any of these Terms, You are prohibited from
+          using or accessing this site. The materials contained in this website
+          are protected by applicable copyright and trademark law.
         </li>
         <li>
           Your continued use of BP is also subject to the
@@ -339,9 +340,10 @@
         <li>
           You may terminate Your BP Account and Your right to use BP at any time
           and for any reason or no reason, by contacting Us at
-          <a href="mailto:support@BP.io">support@BP.io</a>. However, if You have
-          a separate agreement with Us which has conflicting terms regarding
-          termination, those terms shall take precedence.
+          <a href="mailto:support@ballmers.party">support@ballmers.party</a>.
+          However, if You have a separate agreement with Us which has
+          conflicting terms regarding termination, those terms shall take
+          precedence.
         </li>
         <li>
           After cancellation or termination of Your BP Account for any reason,
