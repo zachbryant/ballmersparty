@@ -1,44 +1,45 @@
-<template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        frontend
-      </h1>
-      <h2 class="subtitle">
-        My pioneering Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+  b-container(fluid class="container")
+    b-row
+      b-col(cols="9")
+        IntroChart
+      b-col(cols="3")
+        //StartBox
 </template>
 
-<script>
+<script scoped>
 import Logo from '~/components/Logo.vue'
+import StartBox from '@/components/StartBox.vue'
+import IntroChart from '@/components/IntroChart.vue'
 
 export default {
+  name: 'home',
   components: {
+    StartBox,
+    IntroChart,
     Logo
   }
 }
 </script>
 
-<style>
+<style scoped>
+.sexy_line {
+  display: block;
+  border: none;
+  color: white;
+  height: 3px;
+  background: black;
+  background: -webkit-gradient(
+    radial,
+    100% 100%,
+    0,
+    0% 0%,
+    1000,
+    from(#fff),
+    to(rgba(0, 0, 0, 0))
+  );
+}
+
 .container {
   margin: 0 auto;
   min-height: 100vh;
