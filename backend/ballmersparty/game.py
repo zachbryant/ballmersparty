@@ -48,6 +48,9 @@ class GameState:
 
 
 class GameSession:
+
+    NUMBER_OF_ROUNDS = 5
+
     join_code: str
     party_master: str
 
@@ -60,7 +63,7 @@ class GameSession:
         self.join_code = join_code
         self.party_master = party_master
         self.game_state = GameState()
-        self.rounds = list(itertools.repeat(Round(users), 5))
+        self.rounds = list(itertools.repeat(Round(users), NUMBER_OF_ROUNDS))
 
     def add_user(self, user: User):
         self.users.append(user)
