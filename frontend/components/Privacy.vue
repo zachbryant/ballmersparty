@@ -1,9 +1,5 @@
-<template>
-  <div class="privacy">
-    <v-card>
-      <v-card-title> </v-card-title>
-    </v-card>
-  </div>
+<template lang="pug">
+  h1 Privacy component
 </template>
 
 <script>

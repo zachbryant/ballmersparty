@@ -1,10 +1,7 @@
 <template>
   <div class="terms">
     <div id="dialog" class="pt-5 pb-5">
-      <v-layout class="align-center mb-4" row text-xs-center>
-        <!--<Logo src="../assets/logo_light_nobg.png" width="72px" height="72px" /> -->
-        <h2>ballmers.party Terms of Service</h2>
-      </v-layout>
+      <h2 class="mb-4">Terms and Conditions on ballmers.party</h2>
 
       <p>
         Hello! This is the Ballmer's Party ("<strong>BP</strong>") Terms of
@@ -18,14 +15,14 @@
 
       <p>
         The terms "<strong>We</strong>", "<strong>Us</strong>", and
-        "<strong>Our</strong>" refer to the BP Owners.
+        "<strong>Our</strong>" refer to the BP Owners and Operators.
       </p>
 
       <h4>Overview</h4>
       <p>
         We will do Our best to give You a concise outline of the Terms in this
         document. Know that when You accept this section, You are accepting all
-        of the Terms.
+        of the Terms in this document.
       </p>
       <ul>
         <li>
@@ -42,7 +39,7 @@
         </li>
         <li>
           We expect You and Your party to encourage good sportsmanship, and to
-          discourage peer-pressure to drink on underage or susceptable users. By
+          discourage peer-pressure on underage or susceptable users to drink. By
           accepting these terms, You absolve Us of any grievance which results,
           either directly or indrectly, from Your or Your party's actions.
         </li>

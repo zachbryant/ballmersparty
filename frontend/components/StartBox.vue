@@ -3,7 +3,7 @@
 		b-card(bg-variant="primary" border-variant="primary" class="pl-4 pr-4 pt-0 pb-3 mb-3")
 			h5(class="text-center align-center pb-3")
 				div(class=" align-center")
-					span [ start | join ] 
+					span [start | join] a party 
 					b-tooltip(
 						target="partyTooltip" 
 						triggers="hover"
