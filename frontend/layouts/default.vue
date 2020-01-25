@@ -2,7 +2,7 @@
   div
     div#container
       Navbar
-      nuxt
+      nuxt(class="pt-4")
     Footer
 </template>
 
