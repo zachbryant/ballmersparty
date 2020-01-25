@@ -40,7 +40,6 @@ class GameManager:
 
 
 class GameState:
-
     pass
 
 

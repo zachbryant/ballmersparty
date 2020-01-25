@@ -25,7 +25,7 @@ class GameNamespace(AsyncNamespace):
         if not username:
             return
 
-        self._user_table[str(sid)] = User(sid, username)
+        self._user_table[str(sid)] = User(sid, username, self)
         await self.emit("registered", {"success": True}, room=sid)
 
     async def on_join_game(self, sid, data):
