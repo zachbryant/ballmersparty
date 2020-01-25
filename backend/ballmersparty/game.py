@@ -1,8 +1,10 @@
 from typing import Dict
 
 from .user import User
+from .round import Round
 
 import random
+import itertools
 
 class GameManager:
 
@@ -56,6 +58,7 @@ class GameSession:
         self.join_code = join_code
         self.party_master = party_master
         self.game_state = GameState()
+        self.rounds = list(itertools.repeat(Round(users), 5))
 
     def add_user(self, user: User):
         users.append(user)
