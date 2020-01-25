@@ -1,4 +1,5 @@
 from .problem import Problem, ProblemSubmission
+from .user import User
 
 from typing import Dict
 
@@ -16,14 +17,14 @@ class Round:
         self.first_passed_user = None # User that passes the first test case
 
         for user in users:
-            self.user_stats[user] = UserRoundStats()
+            self.user_stats[User] = UserRoundStats()
     
     def submission(self, user: User):
 
         # TODO: Need to make the submission have filed lines and test_cases_passed
 
         submission = ProblemSubmission(self.problem, user, '') # last argument is submission_data
-        user_stats[user].update_stats(submission)
+        self.user_stats[user].update_stats(submission)
 
         # Logic for first user passed a test case
         if self.first_passed_user == None and submission.test_cases_passed > 0:
