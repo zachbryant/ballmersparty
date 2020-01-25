@@ -15,12 +15,10 @@ class ProblemSubmission:
         self,
         problem: "Problem",
         user: "User",
-        game_session: "GameSession",
         submission_data,
     ):
         self.problem = problem
         self.user = user
-        self.game_session = game_session
         self.submission_data = submission_data
 
     def validate(self):
