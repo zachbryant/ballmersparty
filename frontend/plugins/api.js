@@ -30,6 +30,10 @@ class Api {
   onGameState(func) {
     this.socket.on('game_state', func)
   }
+
+  _gameAction(object) {
+    this.socket.emit('game_action', object)
+  }
 }
 
 Vue.prototype.$api = new Api()
