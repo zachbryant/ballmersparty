@@ -50,8 +50,8 @@ class GameSession:
 
     users = []
 
-    def __init__(self, join_code, party_master):
-        if type(join_code) not str  or type(party_master) not str:
+    def __init__(self, join_code, party_master: User):
+        if type(join_code) not str or type(party_master) not User:
             raise TypeError
 
         self.join_code = join_code
@@ -59,14 +59,14 @@ class GameSession:
         self.game_state = GameState()
 
     def add_user(self, user: User):
-        users.add(user)
+        users.append(user)
 
     def remove_user(self, user: User):
         users.remove(user)
 
     def stop_game(self, join_code):
         for user in users:
-            user.endGame()
+            user.remove_game()
     
 
 
