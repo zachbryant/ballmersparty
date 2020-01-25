@@ -5,28 +5,30 @@ from .round import Round
 
 import random
 import itertools
+import string
+
+CODE_LENGTH = 4  # Length of the generated game party codes
+
 
 class GameManager:
 
-    CODE_LENGTH = 4 # Length of the generated game party codes
-
-    current_games: Dict[str, "GameSession"] = {} # Active games
+    current_games: Dict[str, "GameSession"] = {}  # Active games
 
     # Create a game party code
     def generate_code(self):
         letters = string.ascii_uppercase
-        return ''.join(random.choice(letter) for i in range(CODE_LENGTH))
+        return "".join(random.choice(letters) for i in range(CODE_LENGTH))
 
     def create_game(self, user: User, options) -> "GameSession":
-        join_code = generate_code()
+        join_code = self.generate_code()
 
         # Checks if party code already exists
         while join_code not in self.current_games:
-            join_code = generate_code()
-        
+            join_code = self.generate_code()
+
         session = GameSession(join_code, user)
 
-        current_games.add(join_code, session)
+        self.current_games[join_code] = session
 
         return join_code
 
@@ -37,7 +39,7 @@ class GameManager:
         return True
 
     def delete_game(self, join_code: str):
-        current_game = current_games.pop(join_code)
+        current_game = self.current_games.pop(join_code)
         current_game.stop_game()
 
 
@@ -52,7 +54,7 @@ class GameSession:
     users = []
 
     def __init__(self, join_code, party_master: User):
-        if type(join_code) not str or type(party_master) not User:
+        if isinstance(join_code, str) or isinstance(party_master, User):
             raise TypeError
 
         self.join_code = join_code
@@ -61,15 +63,12 @@ class GameSession:
         self.rounds = list(itertools.repeat(Round(users), 5))
 
     def add_user(self, user: User):
-        users.append(user)
+        self.users.append(user)
 
     def remove_user(self, user: User):
-        users.remove(user)
+        self.users.remove(user)
 
     def stop_game(self, join_code):
-        for user in users:
+        for user in self.users:
             user.remove_game()
-    
 
-
-        

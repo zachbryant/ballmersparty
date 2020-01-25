@@ -1,7 +1,7 @@
 from socketio import AsyncNamespace
 from typing import Dict, Optional
 from .user import User
-
+from .logging import logger
 
 class GameNamespace(AsyncNamespace):
     _user_table: Dict[str, User] = {}
@@ -11,19 +11,21 @@ class GameNamespace(AsyncNamespace):
         self.game_manager = game_manager
 
     def on_connect(self, sid, environ):
-        pass
+        logger.info(f'New client connected. SID: {sid}')
 
     def on_disconnect(self, sid):
-        pass # destroy user
+        logger.info(f'Client disconnected. SID: {sid}')
 
     def on_create_game(self, sid, data):
-        self.game_manager.create_game()
+        self.game_manager.create_game(self._get_user_from_sid(sid), data)
 
     async def on_register(self, sid, data):
         username = data.get("username")
 
         if not username:
             return
+
+        logger.info(f"New user registered. USERNAME: {username}, SID: {sid}")
 
         self._user_table[str(sid)] = User(sid, username, self)
         await self.emit("registered", {"success": True}, room=sid)
