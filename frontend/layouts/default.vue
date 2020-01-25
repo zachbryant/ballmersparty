@@ -2,8 +2,7 @@
   div
     div#container
       Navbar
-      b-container(fluid class="container")
-        nuxt
+      nuxt
     Footer
 </template>
 
