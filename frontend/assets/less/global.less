@@ -19,6 +19,7 @@ html {
   width: 100%;
 }
 
+.fa-heart,
 li:before {
   color: @primary;
 }
@@ -33,19 +34,19 @@ ul {
   padding: 0;
 }
 
-ul>li:before {
+ul > li:before {
   content: '\f105';
   padding-right: 1rem;
   font-family: FontAwesome;
 }
 
-li>ul>li:before {
+li > ul > li:before {
   content: '\f105\f105';
   padding-right: 1rem;
   font-family: FontAwesome;
 }
 
-li>ul>li>ul>li:before {
+li > ul > li > ul > li:before {
   content: '\f105\f105\f105';
   padding-right: 1rem;
   font-family: FontAwesome;
@@ -103,13 +104,13 @@ h1 {
 h2,
 .header-menu-sep,
 .blinking-cursor {
-  font-size: 3rem;
+  font-size: 3rem !important;
 }
 
 h3,
 .header-menu-item,
 .menu-sep {
-  font-size: 2.6rem;
+  font-size: 2.6rem !important;
 }
 
 h4,
@@ -138,7 +139,7 @@ small {
   font-size: 1.1rem;
 }
 
-a>span:hover,
+a > span:hover,
 a:hover,
 .clicked {
   background-color: white;
@@ -150,7 +151,7 @@ button {
 
 button:hover {
   background-color: white !important;
-  color: @primary  !important;
+  color: @primary !important;
   text-decoration: underline;
 }
 
@@ -170,10 +171,10 @@ a.underline {
 .menu-item,
 .menu-sep,
 a:hover,
-a>span:hover,
+a > span:hover,
 .modal-title,
 .clicked {
-  color: @primary  !important;
+  color: @primary !important;
 }
 
 .menu-item,
