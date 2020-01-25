@@ -1,9 +1,9 @@
 <template lang="pug">
   div
     b-row
-      b-col(cols="9")
+      b-col(cols="8")
         IntroChart
-      b-col(cols="3")
+      b-col(cols="4")
         StartBox
 </template>
 

@@ -4,7 +4,7 @@
       nuxt-link(to="/")
         h1 Ballmer's Peak: Party Edition
           span(class="blink") _
-    b-col(cols="4")
+    b-col(cols="4" class="text-center")
       span(class="header-menu-sep") [
       nuxt-link(to="/party")
         span(v-bind:class="{ clicked: partyActive }" class="header-menu-item" v-on:click="mpartyActive()") Party
