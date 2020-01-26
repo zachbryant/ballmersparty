@@ -226,12 +226,13 @@ class GameSession:
             self.game_state.to_round()
 
         await self.emit_state()
-        
+
     async def process_submission(self, user: User, submission_data):
         if not self.game_state.is_round():
             return
 
-        pass  # TODO:
+        logger.info(f"Recieved code from '{user.username}': {submission_data}")
+        await self.current_round.submission(user, submission_data)
 
     async def start_game(self):
         if not self.game_state.is_pregame():
