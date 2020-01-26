@@ -16,7 +16,7 @@
             b-col(cols="1" class="ml-3 mr-2")
               h3(class="fa fa-quote-left text-primary")
             b-col(cols="10")
-              h4(class="mb-0 justify-content-between align-content-center" ) All in, baby! We are winning, winning, winning, winning.
+              h4(class="mb-0 justify-content-between align-content-center" ) {{quote}}
               p(class="text-primary mt-2 mb-0") | 
                 span(class="text-white") Steve Ballmer
       b-col
@@ -33,18 +33,14 @@
 
 <script>
 import PlayerCard from '@/components/PlayerCard.vue'
+import quotes from '@/assets/quotes'
 
 export default {
   name: 'party',
   components: {
     PlayerCard
   },
-  props: {
-    quote: {
-      type: String,
-      required: true
-    }
-  },
+  props: {},
   data() {
     return {
       ready: false,
@@ -119,6 +115,9 @@ export default {
         return 'Ready!'
       }
       return 'Ready?'
+    },
+    quote: function() {
+      return quotes[Math.floor(Math.random() * quotes.length)]
     }
   }
 }
