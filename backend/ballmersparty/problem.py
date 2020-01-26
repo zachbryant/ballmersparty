@@ -13,6 +13,10 @@ def load_problem_paths():
 
 PROBLEMS_LIST = load_problem_paths()
 
+def validate_problem_structure():
+    for path in PROBLEMS_LIST:
+        Problem.load_problem_from_file(path)
+
 
 class PROBLEM_TYPES:
     CODE = "code"
