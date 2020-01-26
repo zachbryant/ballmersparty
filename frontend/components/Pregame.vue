@@ -2,7 +2,8 @@
   div#pregame(class="d-flex flex-column justify-content-between align-content-center")
     b-row
       b-col
-        h3 Pre-game Room "{{roomName}}"
+        h3(v-if="started") Are you ready, {{userName}}?
+        h3(v-else) Pre-game Room "{{roomName}}"
       // TODO b-col(class="align-self-end")
       //  h3 {{playerCount}} players online
     div#playerlist(class="flow-grid")
@@ -87,6 +88,9 @@ export default {
     },
     userReady: function() {
       return this.$store.state.party.user.ready
+    },
+    userName: function() {
+      return this.$store.state.party.user.username
     },
     readyState: function() {
       if (this.userReady) {
