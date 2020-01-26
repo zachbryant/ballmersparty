@@ -73,7 +73,8 @@ export default {
   methods: {
     startParty() {
       if (this.validatePartyId() && this.validateUserId()) {
-        console.log('Valid')
+        //TODO hit api for party
+        this.$router.push({ path: '/party' })
       } else {
         if (!this.validatePartyId()) {
           this.animateCSS('#partyIdInput', 'shake')
