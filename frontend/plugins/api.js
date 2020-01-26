@@ -41,6 +41,13 @@ class Api {
       type: "ready"
     })
   }
+
+  submitAnswer(data) {
+    this._gameAction({
+      type: "submit_answer",
+      data
+    })
+  }
 }
 
 Vue.prototype.$api = new Api()

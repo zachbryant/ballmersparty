@@ -54,6 +54,7 @@ export default {
   components: {},
   data() {
     return {
+      editor: undefined,
       passedCount: 0,
       failedCount: 0,
       name: 'Problem name',
@@ -61,7 +62,7 @@ export default {
     }
   },
   mounted() {
-    let editor = CodeMirror(this.$refs.editor, {
+    this.editor = CodeMirror(this.$refs.editor, {
       value: 'def main():\n\tpass\n\nif __name__ == "__main__":\n\tmain()',
       lineNumbers: true,
       theme: 'material-darker',
@@ -70,10 +71,13 @@ export default {
       spellcheck: true,
       mode: 'python'
     })
+    this.editor.setSize('100%', '100%')
   },
   methods: {
     submit() {
-      // TODO
+      let plaintext = this.editor.getValue()
+      this.$api.submitAnswer(plaintext)
+      // TODO loading animation
     }
   },
   computed: {
@@ -96,6 +100,10 @@ export default {
 </script>
 
 <style lang="scss">
+.CodeMirror {
+  height: 100%;
+  min-height: 100%;
+}
 .shrinkH1 > h1 {
   font-size: 2.6rem !important;
 }
