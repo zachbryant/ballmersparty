@@ -24,7 +24,7 @@
 						aria-describedby="partyIdHelp" 
 						placeholder="my-memorable-id"
 					)
-					small#partyIdHelp(class="form-text") Share this name with your friends!\
+					small#partyIdHelp(class="form-text") Share this name with your friends!
 					div(class="invalid-feedback") Please enter a party ID.
 				div(class="form-group")
 					label(for="userIdInput") @handle
@@ -60,6 +60,7 @@
 <script>
 import Terms from './Terms'
 import Privacy from './Privacy'
+
 export default {
   name: 'StartBox',
   data() {
@@ -72,8 +73,13 @@ export default {
   },
   methods: {
     startParty() {
+      // TODO autogenerate party id
       if (this.validatePartyId() && this.validateUserId()) {
-        //TODO hit api for party
+        this.$api
+          .register(this.userId, this.partyId)
+          .then(() => {})
+          .catch(err => {})
+        this.$api.cre
         this.$router.push({ path: '/party' })
       } else {
         if (!this.validatePartyId()) {

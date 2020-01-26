@@ -3,7 +3,7 @@
     b-col(class="pr-4")
       div(ref="markHtml" v-html="renderedMarkdown" class="shrinkH1")
     b-col
-      // TODO fix height
+      // TODO fix height1
       b-row
         div(ref="editor" style="width: 100% !important;min-height: 100% !important;")
       b-row(class="mt-3")
