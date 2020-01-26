@@ -1,9 +1,9 @@
 <template lang="pug">
   div
-    b-row
-      b-col(cols="8")
+    b-row(align-v="center")
+      b-col(cols="7" class="d-none d-lg-block")
         IntroChart
-      b-col(cols="4")
+      b-col(cols="5" justify-content-md-center style="min-width: 400px")
         StartBox
 </template>
 

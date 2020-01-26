@@ -1,6 +1,6 @@
 <template lang="pug">
   b-navbar(class="mt-3" toggleable="md" type="dark" variant="dark")
-    b-col(cols="8")
+    b-col(cols="7" class="mr-5")
       nuxt-link(to="/")
         h1(class="text-primary") Ballmer's Peak: Party Edition
           span(class="blink") _

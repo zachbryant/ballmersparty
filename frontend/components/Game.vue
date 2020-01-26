@@ -5,8 +5,6 @@
         div(ref="markHtml" v-html="renderedMarkdown" class="shrinkH1")
       b-col
         // TODO fix height1
-        b-row
-          div(ref="editor" style="width: 100% !important;min-height: 100% !important;")
         b-row(class="mt-3")
           b-col(cols="8" class="px-0")
             p Tests: 
@@ -22,6 +20,8 @@
               @click="submit()"
             ) 
               h3(class="my-0") Run
+        b-row
+          div(ref="editor" style="width: 100% !important;min-height: 100% !important;")
 </template>
 
 <script>
