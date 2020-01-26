@@ -8,9 +8,9 @@
 						span(class="note")  at Purdue.
 				b-col
 					p
-						a(class="underline" v-b-modal.termsModalFooter) Terms
+						a(class="underline" v-b-modal.termsModalFooter) ToS
 						|  and 
-						a(class="underline" v-b-modal.privacyModalFooter) Privacy policy
+						a(class="underline" v-b-modal.privacyModalFooter) Privacy
 						b-modal#termsModalFooter(size="xl" title="Terms and Conditions")
 							Terms
 						b-modal#privacyModalFooter(size="xl" title="Privacy Policy")
