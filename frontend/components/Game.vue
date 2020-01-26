@@ -1,18 +1,18 @@
 <template lang="pug">
   b-card#gameContainer(class="pl-2 pr-3")
-    b-row(class="h-100")
+    b-row(class="")
       b-col(class="pr-4")
-        div(ref="markHtml" v-html="renderedMarkdown" class="shrinkH1")
-      b-col
-        // TODO fix height1
-        b-row(class="mb-3" align-v="between" align-h="center")
+        b-row
+          div(ref="markHtml" v-html="renderedMarkdown" class="shrinkH1")
+        b-row(class="mb-4" align-v="between" align-h="center")
           b-col(cols="8" class="px-0")
-            p(class="mb-0") Tests: 
-              span(class="text-success") {{passedCount}}
+            h5(class="mb-0") Tests: 
+              span(class="text-success inline") {{passedCount}}
               |  / 
               span(class="text-primary") {{failedCount}}
           b-col(cols="4" class="px-0")
             b-btn(
+              :disable="loading"
               block
               size="lg"
               variant="success"
@@ -20,11 +20,28 @@
               @click="submit()"
             ) 
               h3(class="my-0") Run
-        b-row
-          div(ref="editor" style="width: 100% !important;min-height: 100% !important;")
+        b-row#editorContainer
+          div(ref="editor" style="width: 100% !important;")
+        b-row(class="mt-4")
+          b-col(cols="8" class="px-0")
+            h5(class="mb-0") Tests: 
+              span(class="text-success inline") {{passedCount}}
+              |  / 
+              span(class="text-primary") {{failedCount}}
+          b-col(cols="4" class="px-0")
+            b-btn(
+              :disable="loading"
+              block
+              size="lg"
+              variant="success"
+              class=""
+              @click="submit()"
+            ) 
+              h3(class="my-0") Run
 </template>
 
 <script>
+import { Affix } from 'vue-affix'
 import marked from 'marked'
 import katex from 'katex'
 import renderMathInElement from 'katex/contrib/auto-render/auto-render'
@@ -36,9 +53,12 @@ import 'codemirror/mode/python/python'
 
 export default {
   name: 'game',
-  components: {},
+  components: {
+    Affix
+  },
   data() {
     return {
+      loading: false,
       editor: undefined,
       passedCount: 0,
       failedCount: 0,
@@ -55,7 +75,6 @@ export default {
       spellcheck: true,
       mode: 'python'
     })
-    this.editor.setSize('100%', '100%')
   },
   methods: {
     submit() {
@@ -86,9 +105,11 @@ export default {
 </script>
 
 <style lang="scss">
+#editorContainer {
+  //height: 100%;
+}
 .CodeMirror {
-  height: 100%;
-  min-height: 100%;
+  height: 700px;
 }
 .shrinkH1 > h1 {
   font-size: 2.6rem !important;
