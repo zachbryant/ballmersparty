@@ -5,9 +5,9 @@
         div(ref="markHtml" v-html="renderedMarkdown" class="shrinkH1")
       b-col
         // TODO fix height1
-        b-row(class="mt-3")
+        b-row(class="mb-3" align-v="between" align-h="center")
           b-col(cols="8" class="px-0")
-            p Tests: 
+            p(class="mb-0") Tests: 
               span(class="text-success") {{passedCount}}
               |  / 
               span(class="text-primary") {{failedCount}}
@@ -34,21 +34,6 @@ import 'codemirror/theme/material-darker.css'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/python/python'
 
-let temp =
-  "# Integers come in all sizes\n\
-Integers in Python can be as big as the bytes in your machine's memory. There is no limit in size as there is: **$2^31 - 1$** (c++ int) or  **$2^63 - 1$** (C++ long long int).\n\
-As we know, the result of **$a^b$** grows really fast with increasing **b**.\n\
-Let's do some calculations on very large integers.\n\
-**Task**\n\
-Read four numbers, **a**, **b**, **c**, and **d**, and print the results of **$a^b + c^d$**.\n\
-**Input Format**\n\
-Integers **a**, **b**, **c**, and **d** are given on four separate lines, respectively.\n\
-**Constraints**\n\
-$1 \\leq a \\leq 1000$\n\n\
-$1 \\leq b \\leq 1000$\n\n\
-$1 \\leq c \\leq 1000$\n\n\
-$1 \\leq d \\leq 1000$"
-
 export default {
   name: 'game',
   components: {},
@@ -57,8 +42,7 @@ export default {
       editor: undefined,
       passedCount: 0,
       failedCount: 0,
-      name: 'Problem name',
-      markdown: temp
+      name: 'Problem name'
     }
   },
   mounted() {
@@ -82,7 +66,9 @@ export default {
   },
   computed: {
     renderedMarkdown: function() {
-      let renderedMarkdown = marked(this.markdown)
+      let renderedMarkdown = marked(
+        this.$store.state.party.global.problem.description
+      )
       this.$nextTick(() => {
         renderMathInElement(this.$refs.markHtml, {
           delimiters: [
