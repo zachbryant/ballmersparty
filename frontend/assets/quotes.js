@@ -13,7 +13,7 @@ export default [
   "I think our leadership team is a highly accountable leadership team.",
   "Linux is a cancer that attaches itself in an intellectual property sense to everything it touches.",
   "We don't have a monopoly. We have market share. There's a difference.",
-  "DEVELOPERS, DEVELOPERS, DEVELOPERS!!!",
+  "DEVELOPERS👏,DEVELOPERS👏, DEVELOPERS👏!!!",
   "Fucking Eric Schmidt is a fucking pussy. I'm going to fucking bury that guy, I have done it before, and I will do it again. I'm going to fucking kill Google.",
   "All in, baby! We are winning, winning, winning, winning.",
   "I've got my kids brainwashed: You don't use Google, and you don't use an iPod.",
