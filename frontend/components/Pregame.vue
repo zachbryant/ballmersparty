@@ -29,12 +29,13 @@
                 span(class="text-white") Steve Ballmer
       b-col
         b-btn(
-          v-if="started"
+          v-if="!isPartyMaster || (isPartyMaster && started)"
+          :disabled="!started"
           block
           size="lg"
           :variant="readyState"
           class="mb-3 h-100"
-          @click="userReady = !userReady"
+          @click="ready()"
         ) 
           h2(class="my-0") {{readyText}}
         b-btn(
@@ -101,6 +102,10 @@ export default {
     }
   },
   methods: {
+    ready() {
+      // todo unready?
+      this.$api.readyPlayer()
+    },
     start() {
       this.$api.startGame()
     },
