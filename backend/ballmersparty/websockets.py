@@ -21,7 +21,7 @@ class GameNamespace(AsyncNamespace):
 
         user = self._get_user_from_sid(sid)
         if not user:
-            return 
+            return
 
         await self.game_manager.process_game_action(
             user, Action.get_disconnect_action()
@@ -30,25 +30,34 @@ class GameNamespace(AsyncNamespace):
     # def on_create_game(self, sid, data):
     #     user = self._get_user_from_sid(sid)
     #     if not user:
-    #         return 
+    #         return
 
     #     self.game_manager.create_game(user, data)
 
     async def on_register(self, sid, data):
+        if self._get_user_from_sid(sid):
+            return
+
         username = data.get("username").strip()
 
         if not username:
-            await self.emit("registered", {"success": False, "error": "Invalid username"}, room=sid)
+            await self.emit(
+                "registered", {"success": False, "error": "Invalid username"}, room=sid
+            )
             return
 
         join_code = data.get("join_code").strip()
         if not join_code:
-            await self.emit("registered", {"success": False, "error": "Invalid joincode"}, room=sid)
+            await self.emit(
+                "registered", {"success": False, "error": "Invalid joincode"}, room=sid
+            )
             return
 
         user = User(sid, username, self)
         self._user_table[str(sid)] = user
-        logger.info(f"New user registered. USERNAME: {username}, SID: {sid}, JoinCode: {join_code}")
+        logger.info(
+            f"New user registered. USERNAME: {username}, SID: {sid}, JoinCode: {join_code}"
+        )
 
         await self.emit("registered", {"success": True}, room=sid)
         await self.game_manager.join_or_create_game(user, join_code)
@@ -60,23 +69,21 @@ class GameNamespace(AsyncNamespace):
 
     #     user = self._get_user_from_sid(sid)
     #     if not user:
-    #         return 
+    #         return
 
     #     await self.game_manager.join_game(user, join_code)
 
     async def on_game_action(self, sid, data):
         user = self._get_user_from_sid(sid)
         if not user:
-            return 
+            return
 
         action = Action.from_dict(data)
 
         if not action:
             return
 
-        await self.game_manager.process_game_action(
-            user, action
-        )
+        await self.game_manager.process_game_action(user, action)
 
     def _get_user_from_sid(self, sid) -> Optional[User]:
         return self._user_table.get(str(sid))
