@@ -10,11 +10,10 @@
       PlayerCard(
         v-for="p in players" 
           :key="p.sid" 
+          :sid="p.sid" 
           :handle="p.username" 
           :score="p.score"
           :ready="p.ready"
-          :color="color(p.sid)"
-          :lenny="lenny(p.sid)"
       )
     // TODO pre-game room status bar
     // Quote and ready elements
@@ -115,12 +114,6 @@ export default {
     },
     refreshQuote() {
       this.quoteText = quotes[Math.floor(Math.random() * quotes.length)]
-    },
-    lenny(sid) {
-      return ''
-    },
-    color(sid) {
-      return '#fff'
     }
   }
 }
