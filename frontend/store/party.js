@@ -28,7 +28,9 @@ export const state = () => ({
 })
 
 export const mutations = {
-  increment(state) {
-    state.counter++
+  updateGameState(state, newState) {
+    console.log("update game state: " + newState)
+    state.global = newState.global
+    state.user = newState.user
   }
 }

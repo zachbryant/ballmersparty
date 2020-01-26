@@ -82,10 +82,10 @@ export default {
       if (this.validatePartyId() && this.validateUserId()) {
         this.$api
           .register(this.userId, this.partyId)
-          .then(() => {})
+          .then(() => {
+            this.$router.push({ path: '/party' })
+          })
           .catch(err => {})
-        this.$api.cre
-        this.$router.push({ path: '/party' })
       } else {
         if (!this.validatePartyId()) {
           this.animateCSS('#partyIdInput', 'shake')

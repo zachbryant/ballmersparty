@@ -15,6 +15,11 @@ export default {
   components: {
     Navbar,
     Footer
+  },
+  mounted() {
+    this.$api.onGameState(response => {
+      this.$store.commit('party/updateGameState', response)
+    })
   }
 }
 </script>
