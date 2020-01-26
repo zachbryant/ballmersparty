@@ -3,6 +3,7 @@ from typing import Dict, Optional
 from .user import User
 from .logging import logger
 from .action import Action
+import asyncio
 
 
 class GameNamespace(AsyncNamespace):
@@ -26,34 +27,42 @@ class GameNamespace(AsyncNamespace):
             user, Action.get_disconnect_action()
         )
 
-    def on_create_game(self, sid, data):
-        user = self._get_user_from_sid(sid)
-        if not user:
-            return 
+    # def on_create_game(self, sid, data):
+    #     user = self._get_user_from_sid(sid)
+    #     if not user:
+    #         return 
 
-        self.game_manager.create_game(user, data)
+    #     self.game_manager.create_game(user, data)
 
     async def on_register(self, sid, data):
-        username = data.get("username")
+        username = data.get("username").strip()
 
         if not username:
+            await self.emit("registered", {"success": False, "error": "Invalid username"}, room=sid)
             return
 
+        join_code = data.get("join_code").strip()
+        if not join_code:
+            await self.emit("registered", {"success": False, "error": "Invalid joincode"}, room=sid)
+            return
+
+        user = User(sid, username, self)
+        self._user_table[str(sid)] = user
         logger.info(f"New user registered. USERNAME: {username}, SID: {sid}")
 
-        self._user_table[str(sid)] = User(sid, username, self)
         await self.emit("registered", {"success": True}, room=sid)
+        await self.game_manager.join_or_create_game(user, join_code)
 
-    async def on_join_game(self, sid, data):
-        join_code = data.get("join_code")
-        if not join_code:
-            return
+    # async def on_join_game(self, sid, data):
+    #     join_code = data.get("join_code")
+    #     if not join_code:
+    #         return
 
-        user = self._get_user_from_sid(sid)
-        if not user:
-            return 
+    #     user = self._get_user_from_sid(sid)
+    #     if not user:
+    #         return 
 
-        await self.game_manager.join_game(user, join_code)
+    #     await self.game_manager.join_game(user, join_code)
 
     async def on_game_action(self, sid, data):
         user = self._get_user_from_sid(sid)
