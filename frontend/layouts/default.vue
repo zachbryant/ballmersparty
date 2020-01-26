@@ -1,8 +1,8 @@
 <template lang="pug">
   div
+    Navbar#navbar
     div#container
-      Navbar
-      nuxt(class="pt-4")
+      nuxt#view(class="pt-4")
     Footer
 </template>
 
@@ -28,5 +28,14 @@ body {
 #container {
   padding-left: 4%;
   padding-right: 4%;
+  min-height: calc(100vh - 60px - 80px);
+}
+
+#navbar {
+  height: 78px;
+}
+
+#view {
+  min-height: calc(100vh - 78px - 60px - 60px);
 }
 </style>

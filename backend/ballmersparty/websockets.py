@@ -41,7 +41,7 @@ class GameNamespace(AsyncNamespace):
         if not join_code:
             return
 
-        self.game_manager.join_game(self._get_user_from_sid(sid), join_code)
+        await self.game_manager.join_game(self._get_user_from_sid(sid), join_code)
 
     async def on_game_action(self, sid, data):
         action = Action.from_dict(data)
