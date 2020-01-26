@@ -50,7 +50,7 @@
 				class="mt-3"
 				@click="startParty()"
 			) 
-				h3(class="my-0") continue
+				h3(class="my-0") Continue
 
 			b-modal#termsModal(size="xl" title="Terms and Conditions")
 				Terms

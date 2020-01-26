@@ -1,138 +1,35 @@
 <template lang="pug">
   div#party(class="d-flex flex-column justify-content-between align-content-center")
-    div#playerlist(class="flow-grid")
-      PlayerCard(
-        v-for="p in players" 
-          v-bind:key="p.uuid" 
-          v-bind:handle="p.handle" 
-          v-bind:score="p.score"
-          v-bind:color="p.color"
-          v-bind:lenny="p.lenny"
-      )
-    b-row(class="mt-5")
-      b-col
-        b-card#quoteContainer
-          b-row
-            b-col(cols="1" class="ml-3 mr-2")
-              h3(class="fa fa-quote-left text-primary")
-            b-col(cols="10")
-              h4(class="mb-0 justify-content-between align-content-center" ) {{quote}}
-              p(class="text-primary mt-2 mb-0") | 
-                span(class="text-white") Steve Ballmer
-      b-col
-        b-btn(
-          block
-          size="lg"
-          :variant="readyState"
-          class="mb-3 h-100"
-          @click="ready = !ready"
-        ) 
-          h2(class="my-0") {{readyText}}
+    Pregame(v-if="showPregame")
+    Game(v-else)
+    b-btn(
+      @click="showPregame = !showPregame"
+    ) toggle pregame
 
 </template>
 
 <script>
-import PlayerCard from '@/components/PlayerCard.vue'
-import quotes from '@/assets/quotes'
+import Pregame from '@/components/Pregame.vue'
+import Game from '@/components/Game.vue'
 
 export default {
   name: 'party',
   components: {
-    PlayerCard
+    Pregame,
+    Game
   },
   props: {},
   data() {
     return {
-      ready: false,
-      players: [
-        {
-          uuid: 0,
-          handle: 'batman',
-          score: 72,
-          color: '#FF00FF'
-        },
-        {
-          uuid: 1,
-          handle: 'batman',
-          score: 72,
-          color: '#11bbFF'
-        },
-        {
-          uuid: 2,
-          handle: 'batman',
-          score: 72,
-          color: '#cc4411'
-        },
-        {
-          uuid: 3,
-          handle: 'batman',
-          score: 72,
-          color: '#00FFFF'
-        },
-        {
-          uuid: 4,
-          handle: 'batman',
-          score: 72,
-          deltaScore: 10,
-          color: '#FFFF00'
-        },
-        {
-          uuid: 0,
-          handle: 'batman',
-          score: 72,
-          color: '#FF00FF'
-        },
-        {
-          uuid: 1,
-          handle: 'batman',
-          score: 72,
-          color: '#11bbFF'
-        },
-        {
-          uuid: 2,
-          handle: 'batman',
-          score: 72,
-          color: '#cc4411'
-        }
-      ]
+      showPregame: true
     }
   },
-  computed: {
-    rowCount: function() {
-      return this.playerCount / 3
-    },
-    playerCount: function() {
-      return this.players.length
-    },
-    readyState: function() {
-      if (this.ready) {
-        return 'success'
-      }
-      return 'primary'
-    },
-    readyText: function() {
-      if (this.ready) {
-        return 'Ready!'
-      }
-      return 'Ready?'
-    },
-    quote: function() {
-      return quotes[Math.floor(Math.random() * quotes.length)]
-    }
-  }
+  computed: {}
 }
 </script>
 
 <style lang="scss" scoped>
 #party {
   min-height: 100%;
-}
-
-#playerlist {
-  min-height: 75%;
-}
-
-#quoteContainer {
-  background: rgba(255, 255, 255, 0.2);
 }
 </style>

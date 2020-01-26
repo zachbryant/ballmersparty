@@ -2,7 +2,7 @@
 @gradient-fade: rgba(251, 199, 199, 0.7);
 
 html {
-  font-size: 1vw;
+  font-size: 100%;
 }
 
 body {
@@ -25,19 +25,19 @@ ul {
   padding: 0;
 }
 
-ul>li:before {
+ul > li:before {
   content: '\f105';
   padding-right: 1rem;
   font-family: FontAwesome;
 }
 
-li>ul>li:before {
+li > ul > li:before {
   content: '\f105\f105';
   padding-right: 1rem;
   font-family: FontAwesome;
 }
 
-li>ul>li>ul>li:before {
+li > ul > li > ul > li:before {
   content: '\f105\f105\f105';
   padding-right: 1rem;
   font-family: FontAwesome;
@@ -140,7 +140,7 @@ small {
   font-size: 0.8rem;
 }
 
-a>span:hover,
+a > span:hover,
 a:hover,
 .clicked {
   background-color: white;
@@ -152,7 +152,7 @@ button {
 
 button:hover {
   background-color: white !important;
-  color: @primary  !important;
+  color: @primary !important;
   text-decoration: underline;
 }
 
@@ -172,10 +172,10 @@ a.underline {
 .menu-item,
 .menu-sep,
 a:hover,
-a>span:hover,
+a > span:hover,
 .modal-title,
 .clicked {
-  color: @primary  !important;
+  color: @primary !important;
 }
 
 .menu-item,
