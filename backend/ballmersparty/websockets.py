@@ -18,12 +18,20 @@ class GameNamespace(AsyncNamespace):
     async def on_disconnect(self, sid):
         logger.info(f"Client disconnected. SID: {sid}")
 
+        user = self._get_user_from_sid(sid)
+        if not user:
+            return 
+
         await self.game_manager.process_game_action(
-            self._get_user_from_sid(sid), Action.get_disconnect_action()
+            user, Action.get_disconnect_action()
         )
 
     def on_create_game(self, sid, data):
-        self.game_manager.create_game(self._get_user_from_sid(sid), data)
+        user = self._get_user_from_sid(sid)
+        if not user:
+            return 
+
+        self.game_manager.create_game(user, data)
 
     async def on_register(self, sid, data):
         username = data.get("username")
@@ -41,16 +49,24 @@ class GameNamespace(AsyncNamespace):
         if not join_code:
             return
 
-        await self.game_manager.join_game(self._get_user_from_sid(sid), join_code)
+        user = self._get_user_from_sid(sid)
+        if not user:
+            return 
+
+        await self.game_manager.join_game(user, join_code)
 
     async def on_game_action(self, sid, data):
+        user = self._get_user_from_sid(sid)
+        if not user:
+            return 
+
         action = Action.from_dict(data)
 
         if not action:
             return
 
         await self.game_manager.process_game_action(
-            self._get_user_from_sid(sid), action
+            user, action
         )
 
     def _get_user_from_sid(self, sid) -> Optional[User]:

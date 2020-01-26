@@ -13,14 +13,30 @@
 						custom-class="note"
 					) {{ tooltip }}
 					span#partyTooltip (?)
-			div(class="form-group")
-				label(for="partyIdInput") @party-id
-				input#partyIdInput(type="text" class="form-control" aria-describedby="partyIdHelp" placeholder="my-memorable-id")
-				small#partyIdHelp(class="form-text") Share this name with your friends!
-			div(class="form-group")
-				label(for="userIdInput") @handle
-				input#userIdInput(type="text" class="form-control" aria-describedby="userIdHelp" placeholder="batman")
-				small#userIdHelp( class="form-text") What should we call you?
+			form(class="needs-validation" novalidate)
+				div(class="form-group")
+					label(for="partyIdInput") @party-id
+					input#partyIdInput(
+						autofocus
+						v-model="partyId" 
+						type="text" 
+						class="form-control errorInput" 
+						aria-describedby="partyIdHelp" 
+						placeholder="my-memorable-id"
+					)
+					small#partyIdHelp(class="form-text") Share this name with your friends!\
+					div(class="invalid-feedback") Please enter a party ID.
+				div(class="form-group")
+					label(for="userIdInput") @handle
+					input#userIdInput(
+						v-model="userId" 
+						type="text" 
+						class="form-control errorInput" 
+						aria-describedby="userIdHelp" 
+						placeholder="batman"
+					)
+					small#userIdHelp( class="form-text") What should we call you?
+					div(class="invalid-feedback") Please choose a username.
 
 			small By proceeding you agree to our 
 				a(class="underline" v-b-modal.termsModal) terms
@@ -48,31 +64,51 @@ export default {
   name: 'StartBox',
   data() {
     return {
-      valid: false,
       agree: false,
-      user_id: '',
-      party_id: '',
-      nameRules: [
-        v => !!v || 'This field is required',
-        v => v.length >= 3 || 'Must be at least be at least 3 characters.',
-        v => v.length <= 32 || 'Must be less than 32 characters.'
-      ],
-      passRules: [
-        v => !!v || 'This field is required',
-        v => v.length >= 6 || 'Must be at least be at least 6 characters.',
-        v => v.length <= 32 || 'Must be less than 32 characters.'
-      ],
-      tooltip: 'New accounts and parties are created on the fly.'
+      userId: '',
+      partyId: '',
+      tooltip: 'New users and parties are created on the fly.'
     }
   },
   methods: {
     startParty() {
-      if (this.$refs.form.validate()) {
-        console.log('party!')
-        console.log(this.user_id)
+      if (this.validatePartyId() && this.validateUserId()) {
+        //TODO hit api for party
+        this.$router.push({ path: '/party' })
+      } else {
+        if (!this.validatePartyId()) {
+          this.animateCSS('#partyIdInput', 'shake')
+        }
+        if (!this.validateUserId()) {
+          this.animateCSS('#userIdInput', 'shake')
+        }
       }
+    },
+    textColor(b) {
+      if (b) return ''
+      return 'permaRed'
+    },
+    animateCSS(element, animationName, callback) {
+      const node = document.querySelector(element)
+      node.classList.add('animated', animationName)
+
+      function handleAnimationEnd() {
+        node.classList.remove('animated', animationName)
+        node.removeEventListener('animationend', handleAnimationEnd)
+
+        if (typeof callback === 'function') callback()
+      }
+
+      node.addEventListener('animationend', handleAnimationEnd)
+    },
+    validatePartyId() {
+      return !!this.partyId
+    },
+    validateUserId() {
+      return !!this.userId
     }
   },
+  computed: {},
   components: {
     Terms,
     Privacy
@@ -80,4 +116,12 @@ export default {
 }
 </script>
 
-<style lang="less" src="../assets/less/global.less")</style>
+<style lang="less" src="../assets/less/global.less"></style>
+
+<style scoped lang="scss">
+.errorInput {
+  animation-duration: 0.5s;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+}
+</style>

@@ -18,7 +18,7 @@
 
 <script>
 import asciiart from '../assets/asciiart'
-console.log(asciiart)
+
 export default {
   name: 'explain',
   data() {

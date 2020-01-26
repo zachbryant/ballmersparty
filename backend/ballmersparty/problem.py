@@ -1,4 +1,17 @@
 from typing import List
+from .config import PROBLEMS_PATH
+import os
+import random
+import json
+
+
+def load_problem_paths():
+    return list(
+        map(lambda x: os.path.join(PROBLEMS_PATH, x), os.listdir(PROBLEMS_PATH))
+    )
+
+
+PROBLEMS_LIST = load_problem_paths()
 
 
 class PROBLEM_TYPES:
@@ -11,12 +24,7 @@ class ProblemSubmission:
     user: "User"
     game_session: "GameSession"
 
-    def __init__(
-        self,
-        problem: "Problem",
-        user: "User",
-        submission_data,
-    ):
+    def __init__(self, problem: "Problem", user: "User", submission_data):
         self.problem = problem
         self.user = user
         self.submission_data = submission_data
@@ -41,10 +49,23 @@ PROBLEM_TYPE_TO_SUBMISSION_CLASS = {
 
 class Problem:
     type_: str
+    spec: object
+
+
+    def __init__(self, spec, description, path):
+        self.spec = spec
+        self.description = description
+        self.path = path
 
     @classmethod
     def load_problem_from_file(cls, filepath) -> "Problem":
-        pass
+        with open(os.path.join(filepath, 'spec.json'), 'r') as f:
+            spec = json.load(f)
+
+        with open(os.path.join(filepath, 'description.md'), 'r') as f:
+            description = f.read()
+
+        return cls(spec, description, filepath)
 
     def construct_submission(
         self, user: "User", game_session: "GameSession", submission_data: object
@@ -55,13 +76,14 @@ class Problem:
 
 
 class ProblemManager:
-    _problems: List[Problem]
-
-    def __init__(self):
-        pass  # load all problems here
-
-    def _register_problem(self, problem: Problem):
-        self._problems.append(problem)
+    _picked_problem_paths: List[str] = []
 
     def pick_random_problem(self) -> Problem:
-        pass
+        problem_path = random.choice(PROBLEMS_LIST)
+        while problem_path in self._picked_problem_paths:
+            problem_path = random.choice(PROBLEMS_LIST)
+
+        self._picked_problem_paths.append(problem_path)
+
+        return Problem.load_problem_from_file(problem_path)
+

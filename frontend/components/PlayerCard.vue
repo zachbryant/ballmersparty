@@ -11,7 +11,7 @@
       b-col(cols="6" align-self="start")
         h4#handle(class="mt-2 mb-2") {{handle}}
         span#score {{score}} points 
-        span#plusScore(class="text-success")  (+{{deltaScore}})
+        span#plusScore(:class="`text-${deltaColorClass}`")  (+{{deltaScore}})
 
       b-col(cols="3" align-self="center")
         div#badge
@@ -55,6 +55,14 @@ export default {
     return {
       borderSize: '3px',
       playercolor: this.color
+    }
+  },
+  computed: {
+    deltaColorClass: function() {
+      if (this.deltaScore > 0) {
+        return 'info'
+      }
+      return 'white'
     }
   }
 }
