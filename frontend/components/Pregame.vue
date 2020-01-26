@@ -2,7 +2,8 @@
   div#pregame(class="d-flex flex-column justify-content-between align-content-center")
     b-row
       b-col
-        h3 Pre-game Room "{{roomName}}"
+        h3(v-if="started") Are you ready, {{userName}}?
+        h3(v-else) Pre-game Room "{{roomName}}"
       // TODO b-col(class="align-self-end")
       //  h3 {{playerCount}} players online
     div#playerlist(class="flow-grid")
@@ -29,12 +30,13 @@
                 span(class="text-white") Steve Ballmer
       b-col
         b-btn(
-          v-if="started"
+          v-if="!isPartyMaster || (isPartyMaster && started)"
+          :disabled="!started"
           block
           size="lg"
           :variant="readyState"
           class="mb-3 h-100"
-          @click="userReady = !userReady"
+          @click="ready()"
         ) 
           h2(class="my-0") {{readyText}}
         b-btn(
@@ -87,6 +89,9 @@ export default {
     userReady: function() {
       return this.$store.state.party.user.ready
     },
+    userName: function() {
+      return this.$store.state.party.user.username
+    },
     readyState: function() {
       if (this.userReady) {
         return 'success'
@@ -101,6 +106,10 @@ export default {
     }
   },
   methods: {
+    ready() {
+      // todo unready?
+      this.$api.readyPlayer()
+    },
     start() {
       this.$api.startGame()
     },

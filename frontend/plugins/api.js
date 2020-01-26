@@ -35,6 +35,12 @@ class Api {
       type: "start"
     })
   }
+
+  readyPlayer() {
+    this._gameAction({
+      type: "ready"
+    })
+  }
 }
 
 Vue.prototype.$api = new Api()
