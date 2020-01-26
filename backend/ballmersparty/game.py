@@ -207,6 +207,7 @@ class GameSession:
                             "ready": self.current_round.user_ready[user]
                             if self.current_round
                             else None,
+                            "is_party_master": user == self.party_master
                         },
                     },
                 )
