@@ -2,7 +2,7 @@
   b-navbar(class="mt-3" toggleable="md" type="dark" variant="dark")
     b-col(cols="8")
       nuxt-link(to="/")
-        h1(v-on:click="mpartyActive()") Ballmer's Peak: Party Edition
+        h1(v-on:click="mpartyActive()" class="text-primary") Ballmer's Peak: Party Edition
           span(class="blink") _
     b-col(cols="4" class="text-center")
       span(class="header-menu-sep") [
