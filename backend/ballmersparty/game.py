@@ -22,24 +22,24 @@ class GameManager:
         letters = string.ascii_uppercase
         return "".join(random.choice(letters) for i in range(CODE_LENGTH))
 
-    def create_game(self, user: User, options) -> "GameSession":
-        join_code = self.generate_code()
+    async def join_or_create_game(self, user: User, join_code):
+        if join_code in self.current_games:
+            await self.join_game(user, join_code)
+        else:
+            await self.create_game(user, join_code)
 
-        # Checks if party code already exists
-        while join_code not in self.current_games:
-            join_code = self.generate_code()
-
+    async def create_game(self, user: User, join_code) -> "GameSession":
         session = GameSession(join_code, user)
-
         self.current_games[join_code] = session
+        await session.emit_state()
 
-        return join_code
-
-    def join_game(self, user: User, join_code: str):
+    async def join_game(self, user: User, join_code: str):
         if join_code not in self.current_games:
             return False
 
-        self.current_games[join_code].add_user(user)
+        session = self.current_games[join_code]
+        session.add_user(user)
+        await session.emit_state()
         return True
 
     def delete_game(self, join_code: str):
