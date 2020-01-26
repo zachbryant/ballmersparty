@@ -1,24 +1,32 @@
 // https://coolors.co/3a1c71-f25f5c-ffaf7b-7cea9c-55d6be
 $body-bg: #2c2d2e;
 
-$theme-colors: (
-  'primary': #ef5350,
+$theme-colors: ('primary': #ef5350,
   'danger': #efa350,
   'secondary': #ffffff,
   'success': #50efa3,
   'info': #50ecef,
-  'dark': $body-bg
-);
+  'dark': $body-bg);
 
 $navbar-padding-y: 0.25rem;
 
 @import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
-//@import url('https://cdn.jsdelivr.net/npm/animate.css@3.5.1');
+@import url('https://cdn.jsdelivr.net/npm/animate.css@3.5.1');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
-$font-family-sans-serif: 'Share Tech Mono', -apple-system, BlinkMacSystemFont,
-  'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
-  'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+$font-family-sans-serif: 'Share Tech Mono',
+-apple-system,
+BlinkMacSystemFont,
+'Segoe UI',
+Roboto,
+'Helvetica Neue',
+Arial,
+'Noto Sans',
+sans-serif,
+'Apple Color Emoji',
+'Segoe UI Emoji',
+'Segoe UI Symbol',
+'Noto Color Emoji';
 
 // $navbar-light-color: #1b0d34;
 
