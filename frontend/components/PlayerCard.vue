@@ -4,9 +4,9 @@
       b-col(cols="3" align-self="center")
         div(
           class="circle d-flex justify-content-center align-items-center" 
-          :style="{ border: `${borderSize} solid ${playercolor}` }"
+          :style="{ border: `${borderSize} solid ${color}` }"
         )
-          h4#lenny(:style="{ color: this.playercolor }") ♥‿♥
+          h5#lenny(:style="{ color: `${color}` }") {{lenny}}
 
       b-col(cols="6" align-self="start")
         h4#handle(class="mt-2 mb-2") {{handle}}
@@ -19,15 +19,12 @@
 </template>
 
 <script>
+import lennys from '@/assets/lenny'
+
 export default {
   name: 'playercard',
   props: {
-    color: {
-      type: String,
-      default: function() {
-        return '#fff'
-      }
-    },
+    sid: String,
     ready: {
       type: Boolean,
       default: function() {
@@ -49,12 +46,20 @@ export default {
       default: function() {
         return 0
       }
-    },
-    lenny: {
-      type: String,
-      default: function() {
-        return '?'
+    }
+  },
+  methods: {
+    hash(sid) {
+      var hash = 0,
+        i,
+        chr
+      if (sid.length === 0) return hash
+      for (i = 0; i < sid.length; i++) {
+        chr = sid.charCodeAt(i)
+        hash = (hash << 5) - hash + chr
+        hash |= 0 // Convert to 32bit integer
       }
+      return hash
     }
   },
   data() {
@@ -64,6 +69,23 @@ export default {
     }
   },
   computed: {
+    lenny: function() {
+      let h = this.hash(this.handle)
+      if (h < 0) h *= -1
+      let ind = h % lennys.length
+      return lennys[ind]
+    },
+    color: function() {
+      let h = this.hash(this.handle)
+      if (h < 0) h *= -1
+      let r = (h & 0xff0000) % 255,
+        g = (h & 0x00ff00) % 255,
+        b = (h & 0x0000ff) % 255
+      console.log(r)
+      console.log(g)
+      console.log(b)
+      return `rgb(${r}, ${g}, ${b})`
+    },
     started: function() {
       return this.$store.state.party.global.state == 'corral'
     },
@@ -85,8 +107,8 @@ export default {
 <style lang="scss" scoped>
 .circle {
   border-radius: 50%;
-  width: 5vw;
-  height: 5vw;
+  width: 5.5vw;
+  height: 5.5vw;
   background: transparent;
   border: 3px solid white;
 }
