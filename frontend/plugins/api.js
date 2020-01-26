@@ -29,6 +29,12 @@ class Api {
   _gameAction(object) {
     this.socket.emit('game_action', object)
   }
+
+  startGame() {
+    this._gameAction({
+      type: "start"
+    })
+  }
 }
 
 Vue.prototype.$api = new Api()

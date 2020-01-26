@@ -29,6 +29,7 @@
                 span(class="text-white") Steve Ballmer
       b-col
         b-btn(
+          v-if="started"
           block
           size="lg"
           :variant="readyState"
@@ -36,6 +37,15 @@
           @click="userReady = !userReady"
         ) 
           h2(class="my-0") {{readyText}}
+        b-btn(
+          v-if="!started && isPartyMaster"
+          block
+          size="lg"
+          :variant="warning"
+          class="mb-3 h-100"
+          @click="start()"
+        ) 
+          h2(class="my-0") Start?
 
 </template>
 
@@ -58,6 +68,12 @@ export default {
     this.refreshQuote()
   },
   computed: {
+    started: function() {
+      return this.$store.state.party.global.state == 'corral'
+    },
+    isPartyMaster: function() {
+      return this.$store.state.party.user.is_party_master
+    },
     roomName: function() {
       return this.$store.state.party.global.join_code
     },
@@ -84,6 +100,9 @@ export default {
     }
   },
   methods: {
+    start() {
+      this.$api.startGame()
+    },
     refreshQuote() {
       this.quoteText = quotes[Math.floor(Math.random() * quotes.length)]
     },
