@@ -1,5 +1,5 @@
 <template lang="pug">
-  b-card#card(bg-variant="dark" border-variant="light" class="my-2 mx-4")
+  b-card#card(bg-variant="dark" border-variant="light" class="my-3 mx-4")
     b-row
       b-col(cols="3" align-self="center")
         div(

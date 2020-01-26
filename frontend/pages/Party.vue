@@ -9,7 +9,7 @@
           v-bind:color="p.color"
           v-bind:lenny="p.lenny"
       )
-    b-row
+    b-row(class="mt-5")
       b-col
         b-card#quoteContainer
           b-row
@@ -23,8 +23,9 @@
         b-btn(
           block
           size="lg"
-          variant="primary"
+          :variant="readyState"
           class="mb-3 h-100"
+          @click="ready = !ready"
         ) 
           h2(class="my-0") READY
 
@@ -46,6 +47,7 @@ export default {
   },
   data() {
     return {
+      ready: false,
       players: [
         {
           uuid: 0,
@@ -76,6 +78,24 @@ export default {
           handle: 'batman',
           score: 72,
           color: '#FFFF00'
+        },
+        {
+          uuid: 0,
+          handle: 'batman',
+          score: 72,
+          color: '#FF00FF'
+        },
+        {
+          uuid: 1,
+          handle: 'batman',
+          score: 72,
+          color: '#11bbFF'
+        },
+        {
+          uuid: 2,
+          handle: 'batman',
+          score: 72,
+          color: '#cc4411'
         }
       ]
     }
@@ -86,6 +106,12 @@ export default {
     },
     playerCount: function() {
       return this.players.length
+    },
+    readyState: function() {
+      if (this.ready) {
+        return 'success'
+      }
+      return 'primary'
     }
   }
 }
