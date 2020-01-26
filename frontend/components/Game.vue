@@ -1,26 +1,27 @@
 <template lang="pug">
-  b-row(class="h-100")
-    b-col(class="pr-4")
-      div(ref="markHtml" v-html="renderedMarkdown" class="shrinkH1")
-    b-col
-      // TODO fix height1
-      b-row
-        div(ref="editor" style="width: 100% !important;min-height: 100% !important;")
-      b-row(class="mt-3")
-        b-col(cols="8" class="px-0")
-          p Tests: 
-            span(class="text-success") {{passedCount}}
-            |  / 
-            span(class="text-primary") {{failedCount}}
-        b-col(cols="4" class="px-0")
-          b-btn(
-            block
-            size="lg"
-            variant="success"
-            class=""
-            @click="submit()"
-          ) 
-            h3(class="my-0") Run
+  b-card#gameContainer(class="pl-2 pr-3")
+    b-row(class="h-100")
+      b-col(class="pr-4")
+        div(ref="markHtml" v-html="renderedMarkdown" class="shrinkH1")
+      b-col
+        // TODO fix height1
+        b-row
+          div(ref="editor" style="width: 100% !important;min-height: 100% !important;")
+        b-row(class="mt-3")
+          b-col(cols="8" class="px-0")
+            p Tests: 
+              span(class="text-success") {{passedCount}}
+              |  / 
+              span(class="text-primary") {{failedCount}}
+          b-col(cols="4" class="px-0")
+            b-btn(
+              block
+              size="lg"
+              variant="success"
+              class=""
+              @click="submit()"
+            ) 
+              h3(class="my-0") Run
 </template>
 
 <script>
@@ -97,5 +98,9 @@ export default {
 <style lang="scss">
 .shrinkH1 > h1 {
   font-size: 2.6rem !important;
+}
+
+#gameContainer {
+  background: rgba(255, 255, 255, 0.1);
 }
 </style>

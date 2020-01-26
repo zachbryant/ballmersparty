@@ -1,8 +1,8 @@
 <template lang="pug">
   div#party(class="d-flex flex-column justify-content-between align-content-center")
-    // TODO smooth transitions here
-    Pregame(v-if="showPregame")
-    Game(v-else)
+    transition(name="fade" mode="out-in")
+      Pregame(v-if="showPregame")
+      Game(v-if="playingRound")
     //b-btn(
       @click="showPregame = !showPregame"
       ) toggle pregame
@@ -22,19 +22,22 @@ export default {
   },
   props: {},
   data() {
-    return {
-      showPregame: true
-    }
+    return {}
   },
   computed: {
+    playingRound() {
+      let state = this.$store.state.party.global.state
+      return state === 'round'
+    },
     showPregame() {
-      return this.$store.state.party.global.state === 'pregame'
+      let state = this.$store.state.party.global.state
+      return state === 'pregame' || state === 'corral'
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #party {
   min-height: 100%;
 }

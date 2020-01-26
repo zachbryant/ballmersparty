@@ -2,21 +2,18 @@
   b-navbar(class="mt-3" toggleable="md" type="dark" variant="dark")
     b-col(cols="8")
       nuxt-link(to="/")
-        h1(v-on:click="mpartyActive()" class="text-primary") Ballmer's Peak: Party Edition
+        h1(class="text-primary") Ballmer's Peak: Party Edition
           span(class="blink") _
     b-col(cols="4" class="text-center")
       span(class="header-menu-sep") [
-      nuxt-link(to="/party")
-        span(v-bind:class="{ clicked: partyActive }" class="header-menu-item" v-on:click="mpartyActive()") Party
+      nuxt-link(to="/party" active-class="clicked")
+        span(class="header-menu-item") Party
       span(class="header-menu-sep") |
-      nuxt-link(to="/about")
-        span(v-bind:class="{ clicked: aboutActive }" class="header-menu-item" v-on:click="maboutActive()") About
+      nuxt-link(to="/about" active-class="clicked")
+        span(class="header-menu-item") About
       span(class="header-menu-sep") |
-      //nuxt-link(to="/blog")
-        span(v-bind:class="{ clicked: blogActive }" class="header-menu-item" v-on:click="mblogActive()") Blog
-      //span(class="header-menu-sep") |
-      nuxt-link(to="/contact")
-        span(v-bind:class="{ clicked: contactActive }"  class="header-menu-item" v-on:click="mcontactActive()") Contact
+      nuxt-link(to="/contact" active-class="clicked")
+        span(class="header-menu-item") Contact
       span(class="header-menu-sep") ]
 </template>
 
@@ -24,37 +21,9 @@
 export default {
   name: 'navbar',
   data() {
-    return {
-      partyActive: false,
-      aboutActive: false,
-      blogActive: false,
-      contactActive: false
-    }
+    return {}
   },
-  methods: {
-    clearActive() {
-      this.partyActive = false
-      this.aboutActive = false
-      this.blogActive = false
-      this.contactActive = false
-    },
-    mpartyActive() {
-      this.clearActive()
-      this.partyActive = true
-    },
-    maboutActive() {
-      this.clearActive()
-      this.aboutActive = true
-    },
-    mblogActive() {
-      this.clearActive()
-      this.blogActive = true
-    },
-    mcontactActive() {
-      this.clearActive()
-      this.contactActive = true
-    }
-  }
+  methods: {}
 }
 </script>
 
