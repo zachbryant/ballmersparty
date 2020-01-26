@@ -133,7 +133,7 @@ class GameSession:
         self.current_round = None
         self.problem_manager = ProblemManager()
         self.users = []
-        self.users.append(party_master)
+        self.add_user(party_master)
 
         logger.info(f"New GameSession. JoinCode: {join_code}")
 
@@ -146,6 +146,7 @@ class GameSession:
                 return
 
         self.users.append(user)
+        user.set_game_code(self.join_code)
         logger.info(f"Added '{user.username}' to '{self.join_code}'")
 
     async def remove_user(self, user: User):
