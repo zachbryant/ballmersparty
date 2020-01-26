@@ -1,64 +1,42 @@
-<template>
-  <div class="contact">
-    <v-container fill-height>
-      <v-layout row align-center>
-        <v-flex>
-          <v-card
-            style="display: inline-block;"
-            class="pl-4 pr-4 pb-3 pt-3"
-            width="75%"
-          >
-            <v-card-title overflow>
-              <h2 v-html="greet"></h2>
-            </v-card-title>
-            <v-form>
-              <v-text-field
-                v-model="user_name"
-                name="user_name"
-                label="@user-name"
-                persistent-hint
-              >
-              </v-text-field>
-              <v-text-field
-                v-model="user_email"
-                name="user_email"
-                label="@user_email"
-                persistent-hint
-                :rules="[rules.required, rules.email]"
-                required
-              >
-              </v-text-field>
-              <v-text-field
-                v-model="message"
-                name="message"
-                label="@message"
-                persistent-hint
-                :rules="messageRules"
-                required
-                multi-line
-                :counter="500"
-              >
-              </v-text-field>
-            </v-form>
-            <v-card-actions>
-              <div
-                class="g-recaptcha"
-                data-sitekey="6LeFEVYUAAAAANb9Me4PnVJBWEsl1EDXPzp_YrDE"
-              ></div>
-              <v-btn
-                large
-                block
-                raised
-                color="primary white--text"
-                @click="sendMessage()"
-                >Submit</v-btn
-              >
-            </v-card-actions>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </div>
+<template lang="pug">
+	div(class="contact")
+		b-row(align-center)
+			b-card(
+				border-variant="dark"
+				bg-variant="dark"
+				class="pl-4 pr-4 pb-3 pt-3 w-75"
+			)
+				h2(v-html="greet")
+				form(class="needs-validation mb-3" novalidate v-on:submit.prevent="startParty")
+					div(class="form-group")
+						label(for="emailInput") Email
+						input#emailInput(
+							autofocus
+							v-model="email" 
+							type="email" 
+							class="form-control errorInput" 
+							aria-describedby="emailHelp" 
+							placeholder="email@example.com"
+						)
+						small#emailHelp(class="form-text") What's your email?
+						div(class="invalid-feedback") Please enter a valid email.
+					div(class="form-group")
+						label(for="messageInput") Message
+						input#messageInput(
+							v-model="message" 
+							type="text" 
+							class="form-control errorInput" 
+							aria-describedby="messageHelp" 
+							placeholder="I'd like to tell you...."
+						)
+						small#messageHelp( class="form-text") What would you like to say?
+						div(class="invalid-feedback") Please enter a message.
+				
+					b-btn(
+						block
+						variant="primary"
+						@click=""
+					) Submit
 </template>
 
 <script>

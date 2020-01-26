@@ -1,15 +1,15 @@
 <template lang="pug">
-  b-card#gameContainer(class="pl-2 pr-3")
+  b-card#gameContainer(class="pl-4 pr-4")
     b-row(class="")
       b-col(class="pr-4")
         b-row
           div(ref="markHtml" v-html="renderedMarkdown" class="shrinkH1")
         b-row(class="mb-4" align-v="between" align-h="center")
           b-col(cols="8" class="px-0")
-            h5(class="mb-0") Tests: 
-              span(class="text-success inline") {{passedCount}}
+            h4(class="mb-0") Tests: 
+              span(class="text-success inline" style="font-size: 1.6rem;") {{passedCount}}
               |  / 
-              span(class="text-primary") {{failedCount}}
+              span(class="text-primary" style="font-size: 1.6rem;") {{failedCount}}
           b-col(cols="4" class="px-0")
             b-btn(
               :disable="loading"
@@ -24,10 +24,10 @@
           div(ref="editor" style="width: 100% !important;")
         b-row(class="mt-4")
           b-col(cols="8" class="px-0")
-            h5(class="mb-0") Tests: 
-              span(class="text-success inline") {{passedCount}}
+            h4(class="mb-0") Tests: 
+              span(class="text-success inline" style="font-size: 1.6rem;") {{passedCount}}
               |  / 
-              span(class="text-primary") {{failedCount}}
+              span(class="text-primary" style="font-size: 1.6rem;") {{failedCount}}
           b-col(cols="4" class="px-0")
             b-btn(
               :disable="loading"
@@ -67,7 +67,8 @@ export default {
   },
   mounted() {
     this.editor = CodeMirror(this.$refs.editor, {
-      value: 'def main():\n\tpass\n\nif __name__ == "__main__":\n\tmain()',
+      value:
+        'def main():\n\tpass\n\nif __name__ == "__main__":\n\tmain()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n',
       lineNumbers: true,
       theme: 'material-darker',
       smartIndent: true,
