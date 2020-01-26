@@ -47,6 +47,7 @@ class GameManager:
         current_game.stop_game()
 
     async def process_game_action(self, user: User, action: Action):
+        logger.info(f"Processing action '{action.type_}' from '{user.username}'")
         if user.game_code and user.game_code in self.current_games:
             await self.current_games[user.game_code].process_action(user, action)
 
@@ -208,7 +209,7 @@ class GameSession:
                             "ready": self.current_round.user_ready[user]
                             if self.current_round
                             else None,
-                            "is_party_master": user == self.party_master
+                            "is_party_master": user == self.party_master,
                         },
                     },
                 )
@@ -238,6 +239,7 @@ class GameSession:
         if len(self.users) == 1:
             return
 
+        logger.info(f"Starting game '{self.join_code}'")
         self.current_round = Round(
             self.users, self.problem_manager.pick_random_problem(), self
         )
