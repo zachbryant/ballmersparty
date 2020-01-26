@@ -1,10 +1,11 @@
-from .problem import Problem, ProblemSubmission
+from .problem import Problem, ProblemSubmissionCode
 from .user import User
 
 from typing import Dict
 
-DEFAULT_ROUND_TIME = 900 # default of 15 minutes a.k.a. 900 seconds
-DEFAULT_CRUNCH_TIME = 180 # default of 3 minutes a.k.a. 180 seconds
+DEFAULT_ROUND_TIME = 900  # default of 15 minutes a.k.a. 900 seconds
+DEFAULT_CRUNCH_TIME = 180  # default of 3 minutes a.k.a. 180 seconds
+
 
 class Round:
 
@@ -16,14 +17,14 @@ class Round:
         self.game_session = game_session
         self.total_time = DEFAULT_ROUND_TIME
         self.crunch_time = DEFAULT_CRUNCH_TIME
-        self.first_passed_user = None # User that passes the first test case
+        self.first_passed_user = None  # User that passes the first test case
         self.user_stats = {}
         self.user_ready = {}
 
         for user in users:
             self.user_stats[user] = UserRoundStats(user)
             self.user_ready[user] = False
-    
+
     def set_user_ready(self, user):
         self.user_ready[user] = True
 
@@ -31,16 +32,14 @@ class Round:
         return all(map(lambda key: self.user_ready[key], self.user_ready))
 
     def get_problem_description(self):
-        return {
-            "name": self.problem.name,
-            "description": self.problem.description
-        }
+        return {"name": self.problem.name, "description": self.problem.description}
 
-    def submission(self, user: User):
+    async def submission(self, user: User, submission_data):
 
         # TODO: Need to make the submission have filed lines and test_cases_passed
 
-        submission = ProblemSubmission(self.problem, user, '') # last argument is submission_data
+        submission = ProblemSubmissionCode(self.problem, user, submission_data)
+        await submission.process()
         self.user_stats[user].update_stats(submission)
 
         # Logic for first user passed a test case
@@ -53,10 +52,9 @@ class Round:
             self.user_stats[user].passed_all_cases(self.total_time, self.crunch_time)
 
 
-
 class UserRoundStats:
 
-    CASE_POINT_WORTH = 10 # Amount of points passing a test case is worth
+    CASE_POINT_WORTH = 10  # Amount of points passing a test case is worth
 
     def __init__(self, user: User):
         self.user = user
@@ -76,7 +74,9 @@ class UserRoundStats:
 
     def passed_all_cases(self, total_time, crunch_time):
         passed_all_cases_flag = True
-        self.time_taken = (DEFAULT_ROUND_TIME - total_time) + (DEFAULT_CRUNCH_TIME - crunch_time)
+        self.time_taken = (DEFAULT_ROUND_TIME - total_time) + (
+            DEFAULT_CRUNCH_TIME - crunch_time
+        )
 
     def get_total_points(self):
         total_points = test_cases_passed * CASE_POINT_WORTH
@@ -84,7 +84,6 @@ class UserRoundStats:
             total_points += 10
         if passed_all_cases_flag:
             total_points += 10
-        
+
         return total_points
 
-            

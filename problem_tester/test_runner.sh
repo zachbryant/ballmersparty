@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROBLEM=$1
+PROBLEM=$PROBLEM_NAME
 
 COUNT=0
 
@@ -12,5 +12,5 @@ for input_file in problems/$1/input/*.txt; do
     fi
 done
 
-echo $COUNT
+echo $COUNT > /var/out/score
 

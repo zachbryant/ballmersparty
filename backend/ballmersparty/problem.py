@@ -1,5 +1,8 @@
 from typing import List
 from .config import PROBLEMS_PATH
+from .logging import logger
+import asyncio
+import tempfile
 import os
 import random
 import json
@@ -12,6 +15,7 @@ def load_problem_paths():
 
 
 PROBLEMS_LIST = load_problem_paths()
+
 
 def validate_problem_structure():
     for path in PROBLEMS_LIST:
@@ -38,7 +42,36 @@ class ProblemSubmission:
 
 
 class ProblemSubmissionCode(ProblemSubmission):
-    pass
+    async def process(self):
+        with tempfile.TemporaryDirectory() as temp:
+            logger.info(f"Created tempdir for submission: {temp}")
+
+            with open(os.path.join(temp, "submission.py"), "w") as submission_file:
+                submission_file.write(self.submission_data)
+
+            proc = await asyncio.create_subprocess_shell(
+                [
+                    "docker",
+                    "run",
+                    "-d",
+                    "--name",
+                    self.problem.basename + id(self),
+                    "-v",
+                    f"bind,source={temp},destination=/var/out",
+                    'python_runner:latest'
+                ],
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+            )
+
+            stdout, stderr = await proc.communicate()
+            print(stdout)
+            print(stderr)
+
+            with open(os.path.join(temp, "score"), 'r') as f:
+                result = f.read()
+
+            print(result)
 
 
 class ProblemSubmissionMultipleChoice(ProblemSubmission):
@@ -55,19 +88,19 @@ class Problem:
     type_: str
     spec: object
 
-
     def __init__(self, spec, description, path):
         self.spec = spec
         self.description = description
         self.path = path
-        self.name = self.spec['name']
+        self.name = self.spec["name"]
+        self.basename = os.path.basename(self.path)
 
     @classmethod
     def load_problem_from_file(cls, filepath) -> "Problem":
-        with open(os.path.join(filepath, 'spec.json'), 'r') as f:
+        with open(os.path.join(filepath, "spec.json"), "r") as f:
             spec = json.load(f)
 
-        with open(os.path.join(filepath, 'description.md'), 'r') as f:
+        with open(os.path.join(filepath, "description.md"), "r") as f:
             description = f.read()
 
         return cls(spec, description, filepath)
