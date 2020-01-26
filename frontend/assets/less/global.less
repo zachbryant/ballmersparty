@@ -25,19 +25,19 @@ ul {
   padding: 0;
 }
 
-ul > li:before {
+ul>li:before {
   content: '\f105';
   padding-right: 1rem;
   font-family: FontAwesome;
 }
 
-li > ul > li:before {
+li>ul>li:before {
   content: '\f105\f105';
   padding-right: 1rem;
   font-family: FontAwesome;
 }
 
-li > ul > li > ul > li:before {
+li>ul>li>ul>li:before {
   content: '\f105\f105\f105';
   padding-right: 1rem;
   font-family: FontAwesome;
@@ -141,7 +141,7 @@ h1 span.blink {
   font-size: 3rem;
 }
 
-a > span:hover,
+a>span:hover,
 a:hover,
 .clicked {
   background-color: white;
@@ -153,7 +153,7 @@ button {
 
 button:hover {
   background-color: white !important;
-  color: @primary !important;
+  color: @primary  !important;
   text-decoration: underline;
 }
 
@@ -173,10 +173,10 @@ a.underline {
 .menu-item,
 .menu-sep,
 a:hover,
-a > span:hover,
+a>span:hover,
 .modal-title,
 .clicked {
-  color: @primary !important;
+  color: @primary  !important;
 }
 
 .menu-item,
@@ -240,4 +240,17 @@ a > span:hover,
   50% {
     opacity: 0;
   }
+}
+
+// Css animations
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }

@@ -5,19 +5,17 @@
 
       <p>
         Hello! This is the Ballmer's Party ("
-        <strong>BP</strong>") Terms of
-        Service ("
-        <strong>Terms</strong>"). This document outlines acceptable
-        use of and access to BP. By accessing and using BP, you agree to these
-        Terms. If you do not agree to the posted Terms or to the
-        <router-link class="underline" to="/policy/privacy">Privacy Policy</router-link>, you may not access or use BP in any way.
+        <strong>BP</strong>") Terms of Service (" <strong>Terms</strong>"). This
+        document outlines acceptable use of and access to BP. By accessing and
+        using BP, you agree to these Terms. If you do not agree to the posted
+        Terms or to the
+        <router-link class="underline" to="/privacy">Privacy Policy</router-link
+        >, you may not access or use BP in any way.
       </p>
 
       <p>
         The terms "
-        <strong>We</strong>", "
-        <strong>Us</strong>", and
-        "
+        <strong>We</strong>", " <strong>Us</strong>", and "
         <strong>Our</strong>" refer to the BP Owners and Operators.
       </p>
 
@@ -36,10 +34,7 @@
         </li>
         <li>
           Challenges may be submitted by independent users under
-          <a
-            class="underline"
-            href="https://unlicense.org/"
-          >The Unlicense</a>,
+          <a class="underline" href="https://unlicense.org/">The Unlicense</a>,
           a permissive license with no conditions which dedicates works to the
           Public Domain.
         </li>
@@ -71,10 +66,9 @@
       <ul>
         <li>
           By accessing the website at
-          <a
-            class="underline"
-            href="http://ballmers.party"
-          >http://ballmers.party</a>, You are bound by these Terms, all applicable laws and regulations,
+          <a class="underline" href="http://ballmers.party"
+            >http://ballmers.party</a
+          >, You are bound by these Terms, all applicable laws and regulations,
           and are responsible for compliance with any applicable local laws. If
           You do not agree with any of these Terms, You are prohibited from
           using or accessing this site. The materials contained in this website
@@ -82,7 +76,9 @@
         </li>
         <li>
           Your continued use of BP is also subject to the
-          <router-link class="underline" to="/privacy">Privacy Policy</router-link>, which outlines practices such as data collection, data retention,
+          <router-link class="underline" to="/privacy"
+            >Privacy Policy</router-link
+          >, which outlines practices such as data collection, data retention,
           data security, and use of Your data.
         </li>
         <li>
@@ -110,15 +106,15 @@
         <li>
           BP accounts will be created and maintained using a username and
           password that You provide (Your "
-          <strong>Credentials</strong>"). You
-          may not be disclose Your Credentials, and You may not access an
-          account that was created by another user. You agree that You are
-          responsible for maintaining the confidentiality of Your Credentials
-          and for all activities that occur under Your BP account. You agree to
-          notify Us of any unauthorized use of or access to BP, its user
-          accounts, or any other security breach. You agree that We will not be
-          liable for any loss or damage arising from You failure to provide Us
-          with accurate information necessary for containing a security breach.
+          <strong>Credentials</strong>"). You may not be disclose Your
+          Credentials, and You may not access an account that was created by
+          another user. You agree that You are responsible for maintaining the
+          confidentiality of Your Credentials and for all activities that occur
+          under Your BP account. You agree to notify Us of any unauthorized use
+          of or access to BP, its user accounts, or any other security breach.
+          You agree that We will not be liable for any loss or damage arising
+          from You failure to provide Us with accurate information necessary for
+          containing a security breach.
         </li>
       </ul>
 
@@ -127,9 +123,9 @@
         <li>
           BP allows Users to disclose graphics, text, communications, or other
           material ("
-          <strong>Content</strong>"). All Content is subject to these
-          Terms. Content may be used in any lawful way. By using BP, You grant
-          Us permission to use the Content as described in these Terms.
+          <strong>Content</strong>"). All Content is subject to these Terms.
+          Content may be used in any lawful way. By using BP, You grant Us
+          permission to use the Content as described in these Terms.
         </li>
         <li>
           By using BP, You may not claim that BP owes You any compensation for
@@ -221,11 +217,11 @@
         <li>
           We shall have the right to use any suggestions, bug reports, or other
           concerns ("
-          <strong>Feedback</strong>") in our reasonable caution,
-          including, but not limited to the incorporation of such suggested
-          changes into BP and/or our other products and services. You hereby
-          grant to Us a perpetual, irrevocable, non­exclusive license under all
-          rights necessary to use Your Feedback for any purpose.
+          <strong>Feedback</strong>") in our reasonable caution, including, but
+          not limited to the incorporation of such suggested changes into BP
+          and/or our other products and services. You hereby grant to Us a
+          perpetual, irrevocable, non­exclusive license under all rights
+          necessary to use Your Feedback for any purpose.
         </li>
       </ul>
 
@@ -298,7 +294,9 @@
               Engaging in or contributing to any illegal activity or activity
               that violates others’ rights.
             </li>
-            <li>Use of derogatory, discriminatory or excessively graphic language.</li>
+            <li>
+              Use of derogatory, discriminatory or excessively graphic language.
+            </li>
             <li>Transmitting worms, viruses or harmful software.</li>
             <li>
               Disclosing the personal or proprietary information of another
@@ -343,9 +341,7 @@
         <li>
           You may terminate Your BP Account and Your right to use BP at any time
           and for any reason or no reason, by contacting Us at
-          <a
-            href="mailto:support@ballmers.party"
-          >support@ballmers.party</a>.
+          <a href="mailto:support@ballmers.party">support@ballmers.party</a>.
           However, if You have a separate agreement with Us which has
           conflicting terms regarding termination, those terms shall take
           precedence.
@@ -377,19 +373,18 @@
           design, compilation, information, computer code, products, software
           (including any downloadable software), services, and all other
           elements of BP provided by BP LLC ("
-          <strong>Materials</strong>") are
-          protected by United States copyright, trade dress, patent, and
-          trademark laws, international conventions, and all other relevant
-          intellectual property and proprietary rights, and applicable laws.
-          Except for any third party content or Content uploaded by You, all
-          Materials are the copyrighted property of BP or its subsidiaries or
-          affiliated companies and/or third party licensors. All trademarks,
-          service marks, and trade names are proprietary to BP or its affiliates
-          and/or third party licensors. Except as expressly authorized by
-          Interviewstreet, You agree not to sell, license, distribute, copy,
-          modify, publicly perform or display, transmit, publish, edit, adapt,
-          create derivative works from, or otherwise make unauthorized use of
-          the Materials.
+          <strong>Materials</strong>") are protected by United States copyright,
+          trade dress, patent, and trademark laws, international conventions,
+          and all other relevant intellectual property and proprietary rights,
+          and applicable laws. Except for any third party content or Content
+          uploaded by You, all Materials are the copyrighted property of BP or
+          its subsidiaries or affiliated companies and/or third party licensors.
+          All trademarks, service marks, and trade names are proprietary to BP
+          or its affiliates and/or third party licensors. Except as expressly
+          authorized by Interviewstreet, You agree not to sell, license,
+          distribute, copy, modify, publicly perform or display, transmit,
+          publish, edit, adapt, create derivative works from, or otherwise make
+          unauthorized use of the Materials.
         </li>
       </ul>
 

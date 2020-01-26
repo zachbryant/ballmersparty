@@ -1,5 +1,7 @@
 <template lang="pug">
-  h1 Privacy component
+  div
+    h2 Placeholder: 
+    p You have no right to privacy on any data we collect while you visit this website.
 </template>
 
 <script>
