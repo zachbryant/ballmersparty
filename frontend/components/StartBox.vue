@@ -13,7 +13,7 @@
 						custom-class="note"
 					) {{ tooltip }}
 					span#partyTooltip (?)
-			form(class="needs-validation" novalidate)
+			form(class="needs-validation" novalidate v-on:submit.prevent="startParty")
 				div(class="form-group")
 					label(for="partyIdInput") @party-id
 					input#partyIdInput(
@@ -38,19 +38,21 @@
 					small#userIdHelp( class="form-text") What should we call you?
 					div(class="invalid-feedback") Please choose a username.
 
-			small By proceeding you agree to our 
-				a(class="underline" v-b-modal.termsModal) terms
-				|  and 
-				a(class="underline" v-b-modal.privacyModal) privacy policy
+				small By proceeding you agree to our 
+					a(class="underline" v-b-modal.termsModal) terms
+					|  and 
+					a(class="underline" v-b-modal.privacyModal) privacy policy
 
-			b-btn(
-				block
-				size="lg"
-				variant="primary"
-				class="mt-3"
-				@click="startParty()"
-			) 
-				h3(class="my-0") Continue
+				b-btn(
+					:disabled="continueDisabled"
+					type="submit"
+					block
+					size="lg"
+					variant="primary"
+					class="mt-3"
+					@click="startParty()"
+				) 
+					h3(class="my-0") Continue
 
 			b-modal#termsModal(size="xl" title="Terms and Conditions")
 				Terms
@@ -70,6 +72,7 @@ export default {
   },
   data() {
     return {
+      continueDisabled: false,
       agree: false,
       userId: '',
       partyId: '',
@@ -81,11 +84,12 @@ export default {
       // TODO autogenerate party id
       if (this.validatePartyId() && this.validateUserId()) {
         /*this.$store.dispatch('party/register', {
-          router: this.$router,
-          api: this.$api,
-          userId: this.userId,
-          partyId: this.partyId
-        })*/
+					router: this.$router,
+					api: this.$api,
+					userId: this.userId,
+					partyId: this.partyId
+				})*/
+        this.continueDisabled = true
         this.$api
           .register(this.userId, this.partyId)
           .then(() => {
@@ -95,7 +99,10 @@ export default {
               })
             }, 500)
           })
-          .catch(console.err)
+          .catch(err => {
+            console.err(err)
+            this.continueDisabled = false
+          })
       } else {
         if (!this.validatePartyId()) {
           this.animateCSS('#partyIdInput', 'shake')
