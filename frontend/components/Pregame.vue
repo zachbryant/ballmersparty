@@ -39,9 +39,10 @@
           h2(class="my-0") {{readyText}}
         b-btn(
           v-if="!started && isPartyMaster"
+          :disabled="playerCount < 2"
           block
           size="lg"
-          :variant="warning"
+          variant="warning"
           class="mb-3 h-100"
           @click="start()"
         ) 
