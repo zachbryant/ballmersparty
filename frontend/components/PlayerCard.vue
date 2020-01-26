@@ -64,6 +64,9 @@ export default {
     }
   },
   computed: {
+    started: function() {
+      return this.$store.state.party.global.state == 'corral'
+    },
     deltaColorClass: function() {
       if (this.deltaScore > 0) {
         return 'info'
@@ -71,10 +74,9 @@ export default {
       return 'white'
     },
     readyColorVariant: function() {
-      if (this.ready) {
-        return 'success'
-      }
-      return 'primary'
+      if (this.ready) return 'success'
+      if (this.started) return 'primary'
+      return 'light'
     }
   }
 }
