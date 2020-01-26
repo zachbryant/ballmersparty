@@ -10,7 +10,7 @@ class Api {
     return new Promise((resolve, reject) => {
       this.socket.emit('register', {
         username: username.trim(),
-        joincode: joincode.trim()
+        join_code: joincode.trim()
       })
       this.socket.once('registered', data => {
         if (data.success) {
