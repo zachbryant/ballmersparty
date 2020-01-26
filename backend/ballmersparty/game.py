@@ -40,7 +40,6 @@ class GameManager:
         session = self.current_games[join_code]
         session.add_user(user)
         await session.emit_state()
-        return True
 
     def delete_game(self, join_code: str):
         current_game = self.current_games.pop(join_code)
@@ -165,6 +164,7 @@ class GameSession:
 
     async def emit_state(self):
         global_state = {
+            "join_code": self.join_code,
             "state": self.game_state.get(),
             "num_rounds_played": self.num_rounds_played,
             "num_total_rounds": NUMBER_OF_ROUNDS,
@@ -185,7 +185,10 @@ class GameSession:
         for user in self.users:
             tasks.append(user.emit("game_state", {
                 "global": global_state,
-                "user": {}
+                "user": {
+                    "tests_passed": 0,
+                    "tests_failed": 0
+                }
             }))
 
         await asyncio.gather(*tasks)
