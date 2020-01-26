@@ -9,16 +9,28 @@ DEFAULT_CRUNCH_TIME = 180 # default of 3 minutes a.k.a. 180 seconds
 class Round:
 
     user_stats: Dict[User, "UserRoundStats"] = {} # Active games
+    user_ready: Dict[User, bool] = {}
 
-    def __init__(self, users):
-        self.problem = Problem() #Picks a random problem
+    def __init__(self, users, problem, game_session):
+        self.problem = problem
+        self.game_session = game_session
         self.total_time = DEFAULT_ROUND_TIME
         self.crunch_time = DEFAULT_CRUNCH_TIME
         self.first_passed_user = None # User that passes the first test case
 
         for user in users:
-            self.user_stats[User] = UserRoundStats()
+            self.user_stats[user] = UserRoundStats(user)
+            self.user_ready[user] = False
     
+    def set_user_ready(self, user):
+        self.user_ready[user] = True
+
+    def is_everyone_ready(self):
+        return all(map(lambda key: self.user_ready[key], self.user_ready))
+
+    def get_problem_description(self):
+        pass
+
     def submission(self, user: User):
 
         # TODO: Need to make the submission have filed lines and test_cases_passed
@@ -41,7 +53,8 @@ class UserRoundStats:
 
     CASE_POINT_WORTH = 10 # Amount of points passing a test case is worth
 
-    def __init__(self):
+    def __init__(self, user: User):
+        self.user = user
         self.compiles = 0
         self.submission_lines = 0
         self.test_cases_passed = 0
