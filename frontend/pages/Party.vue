@@ -1,5 +1,6 @@
 <template lang="pug">
   div#party(class="d-flex flex-column justify-content-between align-content-center")
+    // TODO smooth transitions here
     Pregame(v-if="showPregame")
     Game(v-else)
     b-btn(

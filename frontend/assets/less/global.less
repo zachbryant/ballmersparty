@@ -98,10 +98,6 @@ button:hover h5 {
   color: @primary;
 }
 
-h1 {
-  font-size: 3rem;
-}
-
 h2,
 .header-menu-sep,
 .blinking-cursor {
@@ -129,7 +125,7 @@ ol,
 ul,
 strong,
 button {
-  font-size: 1rem !important;
+  font-size: 1rem;
 }
 
 .note {
@@ -138,6 +134,11 @@ button {
 
 small {
   font-size: 0.8rem;
+}
+
+h1,
+h1 span.blink {
+  font-size: 3rem;
 }
 
 a > span:hover,
@@ -203,7 +204,6 @@ a > span:hover,
   -ms-animation: 1s blink step-end infinite;
   -o-animation: 1s blink step-end infinite;
   animation: 1s blink step-end infinite;
-  font-size: 3rem !important;
 }
 
 .flow-grid {

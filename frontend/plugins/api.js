@@ -6,9 +6,12 @@ class Api {
     this.socket = io('/')
   }
 
-  register(username) {
+  register(username, joincode) {
     return new Promise((resolve, reject) => {
-      this.socket.emit('register', { username })
+      this.socket.emit('register', {
+        username: username.trim(),
+        join_code: joincode.trim()
+      })
       this.socket.once('registered', data => {
         if (data.success) {
           resolve()
@@ -17,14 +20,6 @@ class Api {
         }
       })
     })
-  }
-
-  createGame(options) {
-    this.socket.emit('create_game', options)
-  }
-
-  joinGame(code) {
-    this.socket.emit('join_game', { join_code: code })
   }
 
   onGameState(func) {
