@@ -122,7 +122,7 @@ class GameSession:
     users: List[User] = []
 
     def __init__(self, join_code, party_master: User):
-        if isinstance(join_code, str) or isinstance(party_master, User):
+        if not isinstance(join_code, str) or not isinstance(party_master, User):
             raise TypeError
 
         self.join_code = join_code
