@@ -4,6 +4,7 @@ from .user import User
 from .round import Round
 from .action import Action, ActionTypes
 from .problem import ProblemManager
+from .logging import logger
 
 import random
 import itertools
@@ -119,7 +120,7 @@ class GameSession:
     party_master: str
     current_round: Round
     num_rounds_played: 0
-    users: List[User] = []
+    users: List[User]
 
     def __init__(self, join_code, party_master: User):
         if not isinstance(join_code, str) or not isinstance(party_master, User):
@@ -131,6 +132,10 @@ class GameSession:
         self.num_rounds_played = 0
         self.current_round = None
         self.problem_manager = ProblemManager()
+        self.users = []
+        self.users.append(party_master)
+
+        logger.info(f"New GameSession. JoinCode: {join_code}")
 
     def add_user(self, user: User):
         if not self.game_state.is_pregame():
@@ -141,6 +146,7 @@ class GameSession:
                 return
 
         self.users.append(user)
+        logger.info(f"Added '{user.username}' to '{self.join_code}'")
 
     async def remove_user(self, user: User):
         if not self.game_state.is_pregame():

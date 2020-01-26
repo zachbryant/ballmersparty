@@ -48,7 +48,7 @@ class GameNamespace(AsyncNamespace):
 
         user = User(sid, username, self)
         self._user_table[str(sid)] = user
-        logger.info(f"New user registered. USERNAME: {username}, SID: {sid}")
+        logger.info(f"New user registered. USERNAME: {username}, SID: {sid}, JoinCode: {join_code}")
 
         await self.emit("registered", {"success": True}, room=sid)
         await self.game_manager.join_or_create_game(user, join_code)
