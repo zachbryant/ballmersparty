@@ -3,7 +3,7 @@
 		b-card(bg-variant="primary" border-variant="primary" class="pl-4 pr-4 pt-0 pb-3 mb-3")
 			h5(class="text-center align-center pb-3")
 				div(class=" align-center")
-					span [start | join] a party 
+					span(class="header-menu-item") [start | join] 
 					b-tooltip(
 						target="partyTooltip" 
 						triggers="hover"
@@ -44,38 +44,38 @@
 import Terms from './Terms'
 import Privacy from './Privacy'
 export default {
-	name: 'StartBox',
-	data() {
-		return {
-			valid: false,
-			agree: false,
-			user_id: '',
-			party_id: '',
-			nameRules: [
-				v => !!v || 'This field is required',
-				v => v.length >= 3 || 'Must be at least be at least 3 characters.',
-				v => v.length <= 32 || 'Must be less than 32 characters.'
-			],
-			passRules: [
-				v => !!v || 'This field is required',
-				v => v.length >= 6 || 'Must be at least be at least 6 characters.',
-				v => v.length <= 32 || 'Must be less than 32 characters.'
-			],
-			tooltip: 'New accounts and parties are created on the fly.'
-		}
-	},
-	methods: {
-		startParty() {
-			if (this.$refs.form.validate()) {
-				console.log('party!')
-				console.log(this.user_id)
-			}
-		}
-	},
-	components: {
-		Terms,
-		Privacy
-	}
+  name: 'StartBox',
+  data() {
+    return {
+      valid: false,
+      agree: false,
+      user_id: '',
+      party_id: '',
+      nameRules: [
+        v => !!v || 'This field is required',
+        v => v.length >= 3 || 'Must be at least be at least 3 characters.',
+        v => v.length <= 32 || 'Must be less than 32 characters.'
+      ],
+      passRules: [
+        v => !!v || 'This field is required',
+        v => v.length >= 6 || 'Must be at least be at least 6 characters.',
+        v => v.length <= 32 || 'Must be less than 32 characters.'
+      ],
+      tooltip: 'New accounts and parties are created on the fly.'
+    }
+  },
+  methods: {
+    startParty() {
+      if (this.$refs.form.validate()) {
+        console.log('party!')
+        console.log(this.user_id)
+      }
+    }
+  },
+  components: {
+    Terms,
+    Privacy
+  }
 }
 </script>
 
