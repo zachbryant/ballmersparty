@@ -27,7 +27,7 @@
           class="mb-3 h-100"
           @click="ready = !ready"
         ) 
-          h2(class="my-0") READY
+          h2(class="my-0") {{readyText}}
 
 </template>
 
@@ -77,6 +77,7 @@ export default {
           uuid: 4,
           handle: 'batman',
           score: 72,
+          deltaScore: 10,
           color: '#FFFF00'
         },
         {
@@ -112,6 +113,12 @@ export default {
         return 'success'
       }
       return 'primary'
+    },
+    readyText: function() {
+      if (this.ready) {
+        return 'Ready!'
+      }
+      return 'Ready?'
     }
   }
 }
