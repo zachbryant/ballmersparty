@@ -2,7 +2,8 @@
   div
     Navbar#navbar
     div#container
-      nuxt#view(class="pt-4")
+      transition(name="fade" mode="out-in")
+        nuxt#view(class="pt-4")
     Footer
 </template>
 

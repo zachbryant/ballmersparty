@@ -8,11 +8,12 @@
     div#playerlist(class="flow-grid")
       PlayerCard(
         v-for="p in players" 
-          v-bind:key="p.uuid" 
-          v-bind:handle="p.handle" 
-          v-bind:score="p.score"
-          v-bind:color="p.color"
-          v-bind:lenny="p.lenny"
+          :key="p.sid" 
+          :handle="p.username" 
+          :score="p.score"
+          :ready="p.ready"
+          :color="color(p.sid)"
+          :lenny="lenny(p.sid)"
       )
     // TODO pre-game room status bar
     // Quote and ready elements
@@ -23,7 +24,7 @@
             b-col(cols="1" class="ml-3 mr-2")
               h3(class="fa fa-quote-left text-primary")
             b-col(cols="10")
-              h4(class="mb-0 justify-content-between align-content-center" ) {{quoteText}}
+              h4(class="mb-0 justify-content-between align-content-center" v-html="quoteText")
               p(class="text-primary mt-2 mb-0") | 
                 span(class="text-white") Steve Ballmer
       b-col
@@ -50,71 +51,21 @@ export default {
   props: {},
   data() {
     return {
-      quoteText: '',
-      userReady: false,
-      lobbyReady: false,
-      players: [
-        {
-          uuid: 0,
-          handle: 'batman',
-          score: 72,
-          color: '#FF00FF'
-        },
-        {
-          uuid: 1,
-          handle: 'batman',
-          score: 72,
-          color: '#11bbFF'
-        },
-        {
-          uuid: 2,
-          handle: 'batman',
-          score: 72,
-          color: '#cc4411'
-        },
-        {
-          uuid: 3,
-          handle: 'batman',
-          score: 72,
-          color: '#00FFFF'
-        },
-        {
-          uuid: 4,
-          handle: 'batman',
-          score: 72,
-          deltaScore: 10,
-          color: '#FFFF00'
-        },
-        {
-          uuid: 0,
-          handle: 'batman',
-          score: 72,
-          color: '#FF00FF'
-        },
-        {
-          uuid: 1,
-          handle: 'batman',
-          score: 72,
-          color: '#11bbFF'
-        },
-        {
-          uuid: 2,
-          handle: 'batman',
-          score: 72,
-          color: '#cc4411'
-        }
-      ]
+      quoteText: ''
     }
   },
   mounted() {
     this.refreshQuote()
   },
   computed: {
-    rowCount: function() {
-      return this.playerCount / 3
+    players: function() {
+      return this.$store.state.party.global.users
     },
     playerCount: function() {
       return this.players.length
+    },
+    userReady: function() {
+      return this.$store.state.party.user.ready
     },
     readyState: function() {
       if (this.userReady) {
@@ -132,6 +83,12 @@ export default {
   methods: {
     refreshQuote() {
       this.quoteText = quotes[Math.floor(Math.random() * quotes.length)]
+    },
+    lenny(sid) {
+      return ''
+    },
+    color(sid) {
+      return '#fff'
     }
   }
 }

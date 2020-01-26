@@ -3,9 +3,9 @@
     // TODO smooth transitions here
     Pregame(v-if="showPregame")
     Game(v-else)
-    b-btn(
+    //b-btn(
       @click="showPregame = !showPregame"
-    ) toggle pregame
+      ) toggle pregame
 
 </template>
 
@@ -15,6 +15,7 @@ import Game from '@/components/Game.vue'
 
 export default {
   name: 'party',
+  middleware: 'party',
   components: {
     Pregame,
     Game
@@ -25,7 +26,11 @@ export default {
       showPregame: true
     }
   },
-  computed: {}
+  computed: {
+    showPregame() {
+      return this.$store.state.party.global.state === 'pregame'
+    }
+  }
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-  b-card#card(bg-variant="dark" border-variant="light" class="my-3 mx-4")
+  b-card#card(bg-variant="dark" :border-variant="readyColorVariant" class="my-3 mx-4")
     b-row
       b-col(cols="3" align-self="center")
         div(
@@ -26,6 +26,12 @@ export default {
       type: String,
       default: function() {
         return '#fff'
+      }
+    },
+    ready: {
+      type: Boolean,
+      default: function() {
+        return false
       }
     },
     handle: {
@@ -63,6 +69,12 @@ export default {
         return 'info'
       }
       return 'white'
+    },
+    readyColorVariant: function() {
+      if (this.ready) {
+        return 'success'
+      }
+      return 'primary'
     }
   }
 }

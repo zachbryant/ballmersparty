@@ -54,7 +54,8 @@
 
 			b-modal#termsModal(size="xl" title="Terms and Conditions")
 				Terms
-			b-modal#privacyModal(size="xl" title="Privacy Policy") Placeholder: You have no right to privacy on any data we collect while you visit this website.
+			b-modal#privacyModal(size="xl" title="Privacy Policy")
+				Privacy
 </template>
 
 <script>
@@ -63,6 +64,10 @@ import Privacy from './Privacy'
 
 export default {
   name: 'StartBox',
+  components: {
+    Terms,
+    Privacy
+  },
   data() {
     return {
       agree: false,
@@ -114,11 +119,7 @@ export default {
       return !!this.userId
     }
   },
-  computed: {},
-  components: {
-    Terms,
-    Privacy
-  }
+  computed: {}
 }
 </script>
 
