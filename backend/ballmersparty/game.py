@@ -224,8 +224,9 @@ class GameSession:
         self.current_round.set_user_ready(user)
         if self.current_round.is_everyone_ready():
             self.game_state.to_round()
-            await self.emit_state()
 
+        await self.emit_state()
+        
     async def process_submission(self, user: User, submission_data):
         if not self.game_state.is_round():
             return
@@ -251,6 +252,9 @@ class GameSession:
             user.remove_game()
 
     async def process_action(self, user: User, action: Action):
+        logger.info(
+            f"Processing action '{action.type_}' from '{user.username}' for game '{self.join_code}'"
+        )
         if action.type_ == ActionTypes.DISCONNECTED:
             pass
         elif action.type_ == ActionTypes.READY:
