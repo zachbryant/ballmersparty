@@ -187,7 +187,10 @@ class GameSession:
                 "global": global_state,
                 "user": {
                     "tests_passed": 0,
-                    "tests_failed": 0
+                    "tests_failed": 0,
+                    "username": user.username,
+                    "sid": user.sid,
+                    "ready": self.current_round.user_ready[user] if self.current_round else None
                 }
             }))
 
