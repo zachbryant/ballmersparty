@@ -1,12 +1,14 @@
-from typing import Dict
+from typing import Dict, List
 
 from .user import User
 from .round import Round
 from .action import Action, ActionTypes
+from .problem import ProblemManager
 
 import random
 import itertools
 import string
+import asyncio
 
 CODE_LENGTH = 4  # Length of the generated game party codes
 
@@ -44,9 +46,9 @@ class GameManager:
         current_game = self.current_games.pop(join_code)
         current_game.stop_game()
 
-    def process_game_action(self, user: User, action: Action):
+    async def process_game_action(self, user: User, action: Action):
         if user.game_code and user.game_code in self.current_games:
-            self.current_games[user.game_code].process_action(user, action)
+            await self.current_games[user.game_code].process_action(user, action)
 
 
 class GameStateNodes:
@@ -106,6 +108,9 @@ class GameState:
     def is_endgame(self):
         return self.current_state == GameStateNodes.ENDGAME
 
+    def get(self):
+        return self.current_state
+
 
 NUMBER_OF_ROUNDS = 5
 
@@ -115,7 +120,7 @@ class GameSession:
     party_master: str
     current_round: Round
     num_rounds_played: 0
-    users = []
+    users: List[User] = []
 
     def __init__(self, join_code, party_master: User):
         if isinstance(join_code, str) or isinstance(party_master, User):
@@ -126,6 +131,7 @@ class GameSession:
         self.game_state = GameState()
         self.num_rounds_played = 0
         self.current_round = None
+        self.problem_manager = ProblemManager()
 
     def add_user(self, user: User):
         if not self.game_state.is_pregame():
@@ -133,53 +139,104 @@ class GameSession:
 
         self.users.append(user)
 
-    def remove_user(self, user: User):
+    async def remove_user(self, user: User):
         if not self.game_state.is_pregame():
             return
 
         self.users.remove(user)
+        await self.emit_state()
 
-    def remove_user_by_sid(self, sid):
+    async def remove_user_by_sid(self, sid):
         for user in self.users:
             if user.sid == sid:
-                self.remove_user(user)
+                await self.remove_user(user)
 
-    def user_ready(self, user: User):
+
+    def _get_users_json_list(self):
+        users = []
+        for user in self.users:
+            users.append({
+                "username": user.username,
+                "sid": user.sid,
+                "ready": self.current_round.user_ready[user] if self.current_round else None
+            })
+
+        return users
+
+    async def emit_state(self):
+        global_state = {
+            "state": self.game_state.get(),
+            "num_rounds_played": self.num_rounds_played,
+            "num_total_rounds": NUMBER_OF_ROUNDS,
+            "users": self._get_users_json_list(),
+            "problem": None,
+            "stats": None
+        }
+
+        if self.game_state.is_round():
+            global_state['problem'] = self.current_round.get_problem_description()
+
+        if self.game_state.is_corral() or self.game_state.is_endgame():
+            global_state['stats'] = {
+                "42": "69"
+            }
+
+        tasks = []
+        for user in self.users:
+            tasks.append(user.emit("game_state", {
+                "global": global_state,
+                "user": {}
+            }))
+
+        await asyncio.gather(*tasks)
+
+    async def user_ready(self, user: User):
         if not self.game_state.is_corral():
             return
 
-        pass  # TODO:
+        self.current_round.set_user_ready(user)
+        if self.current_round.is_everyone_ready():
+            self.game_state.to_round()
+            await self.emit_state()
 
-    def process_submission(self, user: User, submission_data):
+    async def process_submission(self, user: User, submission_data):
         if not self.game_state.is_round():
             return
 
         pass  # TODO:
 
-    def start_game(self):
+    async def start_game(self):
         if not self.game_state.is_pregame():
             return
 
-        pass # TODO:
+        if len(self.users) == 1:
+            return
+
+        self.current_round = Round(
+            self.users, self.problem_manager.pick_random_problem(), self
+        )
 
     def stop_game(self, join_code):
         for user in self.users:
             user.remove_game()
 
-    def process_action(self, user: User, action: Action):
+    async def process_action(self, user: User, action: Action):
         if action.type_ == ActionTypes.DISCONNECTED:
             pass
         elif action.type_ == ActionTypes.READY:
-            self.user_ready(user)
+            await self.user_ready(user)
+
         elif action.type_ == ActionTypes.SUBMIT_ANSWER:
-            self.process_submission(user, action.data)
+            await self.process_submission(user, action.data)
+
         elif action.type_ == ActionTypes.KICK_PLAYER:
             if user != self.party_master:
                 return False
-            self.remove_user_by_sid(action.data)
+            await self.remove_user_by_sid(action.data)
+
         elif action.type_ == ActionTypes.START_GAME:
             if user != self.party_master:
                 return False
-            self.start_game()
+            await self.start_game()
 
         return True
