@@ -12,8 +12,7 @@
 						|  that intoxicated participants were better creative problem solvers than the sober participants. There's a little truth to everything, huh?
 					p(style="text-align: justify; text-shadow: none;") If you spend enough time here, we might end up with conclusive data on the exact location of Ballmer's Peak. 
 						strong Climb on!
-				b-col(cols="2")
-				b-col(cols="6")
+				b-col(cols="8")
 					pre#ascii_art {{ asciiart }}
 </template>
 

@@ -1,22 +1,13 @@
 @primary: rgba(239, 83, 80, 1);
 @gradient-fade: rgba(251, 199, 199, 0.7);
 
-html,
-body {
-  height: 100%;
-  margin: 0 auto;
+html {
+  font-size: 12pt;
 }
 
 body {
-  //background: linear-gradient(120deg, @gradient-fade, @primary);
-  padding-left: 4%;
-  padding-right: 4%;
   background-repeat: no-repeat;
   background-attachment: fixed;
-}
-
-html {
-  width: 100%;
 }
 
 .fa-heart,
@@ -34,19 +25,19 @@ ul {
   padding: 0;
 }
 
-ul > li:before {
+ul>li:before {
   content: '\f105';
   padding-right: 1rem;
   font-family: FontAwesome;
 }
 
-li > ul > li:before {
+li>ul>li:before {
   content: '\f105\f105';
   padding-right: 1rem;
   font-family: FontAwesome;
 }
 
-li > ul > li > ul > li:before {
+li>ul>li>ul>li:before {
   content: '\f105\f105\f105';
   padding-right: 1rem;
   font-family: FontAwesome;
@@ -98,7 +89,7 @@ strong,
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: 2em;
 }
 
 h2,
@@ -110,7 +101,7 @@ h2,
 h3,
 .header-menu-item,
 .menu-sep {
-  font-size: 2.6rem !important;
+  font-size: 1.6em !important;
 }
 
 h4,
@@ -139,7 +130,7 @@ small {
   font-size: 1.1rem;
 }
 
-a > span:hover,
+a>span:hover,
 a:hover,
 .clicked {
   background-color: white;
@@ -151,7 +142,7 @@ button {
 
 button:hover {
   background-color: white !important;
-  color: @primary !important;
+  color: @primary  !important;
   text-decoration: underline;
 }
 
@@ -171,10 +162,10 @@ a.underline {
 .menu-item,
 .menu-sep,
 a:hover,
-a > span:hover,
+a>span:hover,
 .modal-title,
 .clicked {
-  color: @primary !important;
+  color: @primary  !important;
 }
 
 .menu-item,
