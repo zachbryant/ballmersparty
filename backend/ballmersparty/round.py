@@ -8,8 +8,8 @@ DEFAULT_CRUNCH_TIME = 180 # default of 3 minutes a.k.a. 180 seconds
 
 class Round:
 
-    user_stats: Dict[User, "UserRoundStats"] = {} # Active games
-    user_ready: Dict[User, bool] = {}
+    user_stats: Dict[User, "UserRoundStats"]  # Active games
+    user_ready: Dict[User, bool]
 
     def __init__(self, users, problem, game_session):
         self.problem = problem
@@ -17,6 +17,8 @@ class Round:
         self.total_time = DEFAULT_ROUND_TIME
         self.crunch_time = DEFAULT_CRUNCH_TIME
         self.first_passed_user = None # User that passes the first test case
+        self.user_stats = {}
+        self.user_ready = {}
 
         for user in users:
             self.user_stats[user] = UserRoundStats(user)
@@ -29,7 +31,10 @@ class Round:
         return all(map(lambda key: self.user_ready[key], self.user_ready))
 
     def get_problem_description(self):
-        pass
+        return {
+            "name": self.problem.name,
+            "description": self.problem.description
+        }
 
     def submission(self, user: User):
 

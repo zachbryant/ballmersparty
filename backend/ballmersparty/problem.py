@@ -60,6 +60,7 @@ class Problem:
         self.spec = spec
         self.description = description
         self.path = path
+        self.name = self.spec['name']
 
     @classmethod
     def load_problem_from_file(cls, filepath) -> "Problem":
