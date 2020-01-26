@@ -202,8 +202,10 @@ class GameSession:
                     {
                         "global": global_state,
                         "user": {
-                            "tests_passed": 0,
-                            "tests_failed": 0,
+                            "tests_passed": self.current_round.test_cases_passed[user]
+                            if self.current_round
+                            else 0,
+                            "tests_failed": 10,
                             "username": user.username,
                             "sid": user.sid,
                             "ready": self.current_round.user_ready[user]

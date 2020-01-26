@@ -11,6 +11,7 @@ class Round:
 
     user_stats: Dict[User, "UserRoundStats"]  # Active games
     user_ready: Dict[User, bool]
+    test_cases_passed: Dict[User, int]
 
     def __init__(self, users, problem, game_session):
         self.problem = problem
@@ -24,6 +25,7 @@ class Round:
         for user in users:
             self.user_stats[user] = UserRoundStats(user)
             self.user_ready[user] = False
+            self.test_cases_passed[user] = 0
 
     def set_user_ready(self, user):
         self.user_ready[user] = True
@@ -35,21 +37,23 @@ class Round:
         return {"name": self.problem.name, "description": self.problem.description}
 
     async def submission(self, user: User, submission_data):
-
-        # TODO: Need to make the submission have filed lines and test_cases_passed
-
         submission = ProblemSubmissionCode(self.problem, user, submission_data)
-        await submission.process()
+        test_cases_passed = await submission.process()
         self.user_stats[user].update_stats(submission)
 
         # Logic for first user passed a test case
-        if self.first_passed_user == None and submission.test_cases_passed > 0:
+        if self.first_passed_user == None and test_cases_passed > 0:
             self.first_passed_user = user
             self.user_stats[user].first_to_pass()
             # TODO: Start crunch time timer and notify users
 
-        if submission.test_cases_passed == self.problem.total_cases:
-            self.user_stats[user].passed_all_cases(self.total_time, self.crunch_time)
+        if test_cases_passed > self.test_cases_passed[user]:
+            self.test_cases_passed[user] = test_cases_passed
+
+        await self.game_session.emit_state()
+
+        # if submission.test_cases_passed == self.problem.total_cases:
+        #     self.user_stats[user].passed_all_cases(self.total_time, self.crunch_time)
 
 
 class UserRoundStats:

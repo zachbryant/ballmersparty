@@ -82,6 +82,8 @@ class ProblemSubmissionCode(ProblemSubmission):
 
         print(result)
 
+        return int(result)
+
         # shutil.rmtree(dir_name)
 
 
