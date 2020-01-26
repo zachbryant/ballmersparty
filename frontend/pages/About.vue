@@ -1,7 +1,7 @@
 <template lang="pug">
 	div
 		b-container(fluid)
-			b-row(class="text-center")
+			b-row(class="justify-content-center text-center")
 				b-col(cols="4 text-center")
 					h3#explain_title /**** Eh what's all this now? ****/
 					p Programmers have a bit of a reputation for drinking. If (or when) you've had to read someone else's 

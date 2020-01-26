@@ -1,5 +1,5 @@
 <template lang="pug">
-	div
+	div#startContainer
 		b-card(bg-variant="primary" border-variant="primary" class="pl-4 pr-4 pt-0 pb-3 mb-3")
 			h5(class="text-center align-center pb-3")
 				div(class=" align-center")
@@ -147,5 +147,8 @@ export default {
   animation-duration: 0.5s;
   animation-delay: 0s;
   animation-iteration-count: 1;
+}
+.startContainer {
+  min-width: 400px;
 }
 </style>
