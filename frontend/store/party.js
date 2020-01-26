@@ -19,6 +19,7 @@ export const state = () => ({
     }
   },
   user: {
+    is_party_master: false,
     username: '',
     ready: false,
     tests_passed: 0,
@@ -32,5 +33,24 @@ export const mutations = {
     console.log("update game state: " + newState)
     state.global = newState.global
     state.user = newState.user
+  }
+}
+
+export const actions = {
+  async register({
+    state
+  }, {
+    router,
+    api,
+    userId,
+    partyId
+  }) {
+    let res = await api.register(userId, partyId)
+    console.log(
+      'join code: ' + state.global.join_code
+    )
+    router.push({
+      path: '/party'
+    })
   }
 }

@@ -80,12 +80,22 @@ export default {
     startParty() {
       // TODO autogenerate party id
       if (this.validatePartyId() && this.validateUserId()) {
+        /*this.$store.dispatch('party/register', {
+          router: this.$router,
+          api: this.$api,
+          userId: this.userId,
+          partyId: this.partyId
+        })*/
         this.$api
           .register(this.userId, this.partyId)
           .then(() => {
-            this.$router.push({ path: '/party' })
+            setTimeout(() => {
+              this.$router.push({
+                path: '/party'
+              })
+            }, 500)
           })
-          .catch(err => {})
+          .catch(console.err)
       } else {
         if (!this.validatePartyId()) {
           this.animateCSS('#partyIdInput', 'shake')

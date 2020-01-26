@@ -2,7 +2,7 @@
   div#pregame(class="d-flex flex-column justify-content-between align-content-center")
     b-row
       b-col
-        h3 Pre-game Room
+        h3 Pre-game Room "{{roomName}}"
       // TODO b-col(class="align-self-end")
       //  h3 {{playerCount}} players online
     div#playerlist(class="flow-grid")
@@ -58,6 +58,9 @@ export default {
     this.refreshQuote()
   },
   computed: {
+    roomName: function() {
+      return this.$store.state.party.global.join_code
+    },
     players: function() {
       return this.$store.state.party.global.users
     },
