@@ -243,6 +243,7 @@ class GameSession:
         self.current_round = Round(
             self.users, self.problem_manager.pick_random_problem(), self
         )
+        self.game_state.to_corral()
         await self.emit_state()
 
     def stop_game(self, join_code):
