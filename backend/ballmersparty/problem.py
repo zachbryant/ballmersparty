@@ -1,11 +1,12 @@
 from typing import List
-from .config import PROBLEMS_PATH
+from .config import PROBLEMS_PATH, TEMP_DIR
 from .logging import logger
 import asyncio
 import tempfile
 import os
 import random
 import json
+import shutil
 
 
 def load_problem_paths():
@@ -43,35 +44,45 @@ class ProblemSubmission:
 
 class ProblemSubmissionCode(ProblemSubmission):
     async def process(self):
-        with tempfile.TemporaryDirectory() as temp:
-            logger.info(f"Created tempdir for submission: {temp}")
+        dir_name = os.path.join(TEMP_DIR, self.user.sid + "_" + str(hash(self)))
+        os.mkdir(dir_name)
 
-            with open(os.path.join(temp, "submission.py"), "w") as submission_file:
-                submission_file.write(self.submission_data)
+        logger.info(f"Created tempdir for submission: {dir_name}")
 
-            proc = await asyncio.create_subprocess_shell(
-                [
-                    "docker",
-                    "run",
-                    "-d",
-                    "--name",
-                    self.problem.basename + id(self),
-                    "-v",
-                    f"bind,source={temp},destination=/var/out",
-                    'python_runner:latest'
-                ],
-                stdout=asyncio.subprocess.PIPE,
-                stderr=asyncio.subprocess.PIPE,
-            )
+        with open(os.path.join(dir_name, "submission.py"), "w") as submission_file:
+            submission_file.write(self.submission_data)
 
-            stdout, stderr = await proc.communicate()
-            print(stdout)
-            print(stderr)
+        command = [
+            "docker",
+            "run",
+            "--rm",
+            "--env",
+            f"PROBLEM_NAME={self.problem.basename}",
+            "--mount",
+            f"type=bind,source={dir_name},target=/var/out",
+            "python_runner:latest",
+        ]
 
-            with open(os.path.join(temp, "score"), 'r') as f:
-                result = f.read()
+        print(command)
 
-            print(result)
+        proc = await asyncio.create_subprocess_exec(
+            *command,
+            # stdout=asyncio.subprocess.PIPE,
+            # stderr=asyncio.subprocess.PIPE,
+        )
+
+        await proc.wait()
+
+        # stdout, stderr = await proc.communicate()
+        # print(stdout)
+        # print(stderr)
+
+        with open(os.path.join(dir_name, "score"), "r") as f:
+            result = f.read()
+
+        print(result)
+
+        # shutil.rmtree(dir_name)
 
 
 class ProblemSubmissionMultipleChoice(ProblemSubmission):
