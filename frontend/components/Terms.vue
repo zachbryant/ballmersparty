@@ -4,18 +4,21 @@
       <h2 class="mb-4">Terms and Conditions on ballmers.party</h2>
 
       <p>
-        Hello! This is the Ballmer's Party ("<strong>BP</strong>") Terms of
-        Service ("<strong>Terms</strong>"). This document outlines acceptable
+        Hello! This is the Ballmer's Party ("
+        <strong>BP</strong>") Terms of
+        Service ("
+        <strong>Terms</strong>"). This document outlines acceptable
         use of and access to BP. By accessing and using BP, you agree to these
         Terms. If you do not agree to the posted Terms or to the
-        <router-link class="underline" to="/policy/privacy"
-          >Privacy Policy</router-link
-        >, you may not access or use BP in any way.
+        <router-link class="underline" to="/policy/privacy">Privacy Policy</router-link>, you may not access or use BP in any way.
       </p>
 
       <p>
-        The terms "<strong>We</strong>", "<strong>Us</strong>", and
-        "<strong>Our</strong>" refer to the BP Owners and Operators.
+        The terms "
+        <strong>We</strong>", "
+        <strong>Us</strong>", and
+        "
+        <strong>Our</strong>" refer to the BP Owners and Operators.
       </p>
 
       <h4>Overview</h4>
@@ -33,7 +36,10 @@
         </li>
         <li>
           Challenges may be submitted by independent users under
-          <a class="underline" href="https://unlicense.org/">The Unlicense</a>,
+          <a
+            class="underline"
+            href="https://unlicense.org/"
+          >The Unlicense</a>,
           a permissive license with no conditions which dedicates works to the
           Public Domain.
         </li>
@@ -61,13 +67,14 @@
         </li>
       </ul>
 
-      <h4>Acceptance of BP Terms</h4>
+      <h4>Acceptance of Terms</h4>
       <ul>
         <li>
           By accessing the website at
-          <a class="underline" href="http://ballmers.party"
-            >http://ballmers.party</a
-          >, You are bound by these Terms, all applicable laws and regulations,
+          <a
+            class="underline"
+            href="http://ballmers.party"
+          >http://ballmers.party</a>, You are bound by these Terms, all applicable laws and regulations,
           and are responsible for compliance with any applicable local laws. If
           You do not agree with any of these Terms, You are prohibited from
           using or accessing this site. The materials contained in this website
@@ -75,9 +82,7 @@
         </li>
         <li>
           Your continued use of BP is also subject to the
-          <router-link class="underline" to="/privacy"
-            >Privacy Policy</router-link
-          >, which outlines practices such as data collection, data retention,
+          <router-link class="underline" to="/privacy">Privacy Policy</router-link>, which outlines practices such as data collection, data retention,
           data security, and use of Your data.
         </li>
         <li>
@@ -104,7 +109,8 @@
         </li>
         <li>
           BP accounts will be created and maintained using a username and
-          password that You provide (Your "<strong>Credentials</strong>"). You
+          password that You provide (Your "
+          <strong>Credentials</strong>"). You
           may not be disclose Your Credentials, and You may not access an
           account that was created by another user. You agree that You are
           responsible for maintaining the confidentiality of Your Credentials
@@ -120,7 +126,8 @@
       <ul>
         <li>
           BP allows Users to disclose graphics, text, communications, or other
-          material ("<strong>Content</strong>"). All Content is subject to these
+          material ("
+          <strong>Content</strong>"). All Content is subject to these
           Terms. Content may be used in any lawful way. By using BP, You grant
           Us permission to use the Content as described in these Terms.
         </li>
@@ -213,7 +220,8 @@
         </li>
         <li>
           We shall have the right to use any suggestions, bug reports, or other
-          concerns ("<strong>Feedback</strong>") in our reasonable caution,
+          concerns ("
+          <strong>Feedback</strong>") in our reasonable caution,
           including, but not limited to the incorporation of such suggested
           changes into BP and/or our other products and services. You hereby
           grant to Us a perpetual, irrevocable, non­exclusive license under all
@@ -290,9 +298,7 @@
               Engaging in or contributing to any illegal activity or activity
               that violates others’ rights.
             </li>
-            <li>
-              Use of derogatory, discriminatory or excessively graphic language.
-            </li>
+            <li>Use of derogatory, discriminatory or excessively graphic language.</li>
             <li>Transmitting worms, viruses or harmful software.</li>
             <li>
               Disclosing the personal or proprietary information of another
@@ -337,7 +343,9 @@
         <li>
           You may terminate Your BP Account and Your right to use BP at any time
           and for any reason or no reason, by contacting Us at
-          <a href="mailto:support@ballmers.party">support@ballmers.party</a>.
+          <a
+            href="mailto:support@ballmers.party"
+          >support@ballmers.party</a>.
           However, if You have a separate agreement with Us which has
           conflicting terms regarding termination, those terms shall take
           precedence.
@@ -368,7 +376,8 @@
           BP is owned and operated by BP LLC. The visual interfaces, graphics,
           design, compilation, information, computer code, products, software
           (including any downloadable software), services, and all other
-          elements of BP provided by BP LLC ("<strong>Materials</strong>") are
+          elements of BP provided by BP LLC ("
+          <strong>Materials</strong>") are
           protected by United States copyright, trade dress, patent, and
           trademark laws, international conventions, and all other relevant
           intellectual property and proprietary rights, and applicable laws.

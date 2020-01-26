@@ -21,19 +21,20 @@
 				label(for="userIdInput") @handle
 				input#userIdInput(type="text" class="form-control" aria-describedby="userIdHelp" placeholder="batman")
 				small#userIdHelp( class="form-text") What should we call you?
-				
-			b-btn(
-				block
-				size="lg"
-				variant="primary"
-				class="mb-3"
-				@click="startParty()"
-			) continue
 
 			small By proceeding you agree to our 
 				a(class="underline" v-b-modal.termsModal) terms
 				|  and 
 				a(class="underline" v-b-modal.privacyModal) privacy policy
+
+			b-btn(
+				block
+				size="lg"
+				variant="primary"
+				class="mt-3"
+				@click="startParty()"
+			) 
+				h3(class="my-0") continue
 
 			b-modal#termsModal(size="xl" title="Terms and Conditions")
 				Terms

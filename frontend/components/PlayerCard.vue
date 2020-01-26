@@ -1,18 +1,61 @@
 <template lang="pug">
-  div
+  b-card#card(bg-variant="dark" border-variant="light" class="my-2 mx-4")
     b-row
-      b-col
-        div(class="circle" v-bind:style="{ border: borderSize solid borderColor }")
+      b-col(cols="3" align-self="center")
+        div(
+          class="circle d-flex justify-content-center align-items-center" 
+          :style="{ border: `${borderSize} solid ${playercolor}` }"
+        )
+          h4#lenny(:style="{ color: this.playercolor }") ♥‿♥
 
-      b-col
+      b-col(cols="6" align-self="start")
+        h4#handle(class="mt-2 mb-2") {{handle}}
+        span#score {{score}} points 
+        span#plusScore(class="text-success")  (+{{deltaScore}})
+
+      b-col(cols="3" align-self="center")
+        div#badge
 
 </template>
 
 <script>
 export default {
   name: 'playercard',
+  props: {
+    color: {
+      type: String,
+      default: function() {
+        return '#fff'
+      }
+    },
+    handle: {
+      type: String,
+      required: true
+    },
+    score: {
+      type: Number,
+      default: function() {
+        return 0
+      }
+    },
+    deltaScore: {
+      type: Number,
+      default: function() {
+        return 0
+      }
+    },
+    lenny: {
+      type: String,
+      default: function() {
+        return '?'
+      }
+    }
+  },
   data() {
-    return {}
+    return {
+      borderSize: '3px',
+      playercolor: this.color
+    }
   }
 }
 </script>
@@ -20,7 +63,24 @@ export default {
 <style lang="scss" scoped>
 .circle {
   border-radius: 50%;
+  width: 5vw;
+  height: 5vw;
   background: transparent;
   border: 3px solid white;
+}
+
+#lenny {
+  margin: 0 auto;
+}
+
+#handle {
+  font-weight: bold;
+}
+
+#card {
+  box-shadow: 3px 2px rgba(0, 0, 0, 0.2);
+}
+
+#plusScore {
 }
 </style>
