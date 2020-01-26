@@ -136,6 +136,10 @@ class GameSession:
         if not self.game_state.is_pregame():
             return
 
+        for user_ in self.users:
+            if user_ == user:
+                return
+
         self.users.append(user)
 
     async def remove_user(self, user: User):
@@ -150,15 +154,18 @@ class GameSession:
             if user.sid == sid:
                 await self.remove_user(user)
 
-
     def _get_users_json_list(self):
         users = []
         for user in self.users:
-            users.append({
-                "username": user.username,
-                "sid": user.sid,
-                "ready": self.current_round.user_ready[user] if self.current_round else None
-            })
+            users.append(
+                {
+                    "username": user.username,
+                    "sid": user.sid,
+                    "ready": self.current_round.user_ready[user]
+                    if self.current_round
+                    else None,
+                }
+            )
 
         return users
 
@@ -170,29 +177,34 @@ class GameSession:
             "num_total_rounds": NUMBER_OF_ROUNDS,
             "users": self._get_users_json_list(),
             "problem": None,
-            "stats": None
+            "stats": None,
         }
 
         if self.game_state.is_round():
-            global_state['problem'] = self.current_round.get_problem_description()
+            global_state["problem"] = self.current_round.get_problem_description()
 
         if self.game_state.is_corral() or self.game_state.is_endgame():
-            global_state['stats'] = {
-                "42": "69"
-            }
+            global_state["stats"] = {"42": "69"}
 
         tasks = []
         for user in self.users:
-            tasks.append(user.emit("game_state", {
-                "global": global_state,
-                "user": {
-                    "tests_passed": 0,
-                    "tests_failed": 0,
-                    "username": user.username,
-                    "sid": user.sid,
-                    "ready": self.current_round.user_ready[user] if self.current_round else None
-                }
-            }))
+            tasks.append(
+                user.emit(
+                    "game_state",
+                    {
+                        "global": global_state,
+                        "user": {
+                            "tests_passed": 0,
+                            "tests_failed": 0,
+                            "username": user.username,
+                            "sid": user.sid,
+                            "ready": self.current_round.user_ready[user]
+                            if self.current_round
+                            else None,
+                        },
+                    },
+                )
+            )
 
         await asyncio.gather(*tasks)
 
