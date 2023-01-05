@@ -23,7 +23,7 @@
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "marked": "^0.8.0",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "pug-plain-loader": "^1.0.0",
     "scss": "^0.2.4",
     "scss-loader": "0.0.1",
